@@ -1,0 +1,313 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://ui/fonts/regular/regular_70.tres" type="DynamicFont" id=1]
+[ext_resource path="res://nodes/menus/InputMappedButton.gd" type="Script" id=2]
+[ext_resource path="res://menus/party_character/StatHex.tscn" type="PackedScene" id=3]
+[ext_resource path="res://menus/BackButtonPanel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://sfx/ui/item_get.ogg" type="AudioStream" id=5]
+[ext_resource path="res://menus/evolution/EvolutionMenu.gd" type="Script" id=6]
+[ext_resource path="res://menus/menu_bg_fade.shader" type="Shader" id=7]
+[ext_resource path="res://menus/BaseMenu.tscn" type="PackedScene" id=8]
+[ext_resource path="res://menus/party/MonsterSpriteContainer.tscn" type="PackedScene" id=9]
+[ext_resource path="res://addons/misc_utils/OverscanMarginContainer.gd" type="Script" id=10]
+[ext_resource path="res://ui/evolution/evo_splash_04.png" type="Texture" id=11]
+[ext_resource path="res://ui/evolution/evo_splash_01.png" type="Texture" id=12]
+[ext_resource path="res://ui/evolution/evo_splash_02.png" type="Texture" id=13]
+[ext_resource path="res://ui/evolution/evo_splash_03.png" type="Texture" id=14]
+[ext_resource path="res://menus/choose_tape/ChooseTapeList.tscn" type="PackedScene" id=15]
+[ext_resource path="res://mods/zSkele_Bootlegs/shadersoverride/SpriteContainer_ext.gd" type="Script" id=16]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 7 )
+shader_param/progress = 1.0
+shader_param/max_alpha = 1.0
+shader_param/base_color = Color( 0.1686, 0.1098, 0.2235, 1 )
+shader_param/hi_color = Color( 0.6706, 0.4588, 0.9098, 0.0625 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+content_margin_left = 20.0
+content_margin_right = 20.0
+bg_color = Color( 0.670588, 0.458824, 0.909804, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+content_margin_left = 20.0
+content_margin_right = 60.0
+bg_color = Color( 1, 1, 1, 1 )
+corner_radius_bottom_right = 60
+corner_detail = 1
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="Animation" id=5]
+resource_name = "default"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 12 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 12 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 11 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[node name="EvolutionMenu" instance=ExtResource( 8 )]
+script = ExtResource( 6 )
+location = ""
+
+[node name="Blur" parent="." index="0"]
+material = SubResource( 1 )
+
+[node name="OverscanMarginContainer" parent="Scroller" index="0"]
+custom_constants/margin_right = 50
+custom_constants/margin_top = 0
+custom_constants/margin_left = 50
+custom_constants/margin_bottom = 0
+vertical_margin = false
+window_safe_area = true
+min_margin_left = 50.0
+min_margin_right = 50.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Scroller/OverscanMarginContainer" index="0"]
+margin_left = 50.0
+margin_right = 1870.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OverscanMarginContainer" type="MarginContainer" parent="Scroller/OverscanMarginContainer/HBoxContainer" index="0"]
+margin_right = 1430.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 0
+custom_constants/margin_top = 50
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 50
+script = ExtResource( 10 )
+horizontal_margin = false
+window_safe_area = true
+min_margin_top = 50.0
+min_margin_bottom = 50.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer" index="0"]
+margin_top = 50.0
+margin_right = 1430.0
+margin_bottom = 1030.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer/VBoxContainer" index="0"]
+margin_right = 600.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 600, 0 )
+size_flags_horizontal = 0
+custom_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer/VBoxContainer/VBoxContainer2" index="0"]
+margin_right = 600.0
+margin_bottom = 90.0
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer/VBoxContainer/VBoxContainer2/PanelContainer" index="0"]
+margin_left = 20.0
+margin_right = 580.0
+margin_bottom = 90.0
+size_flags_vertical = 0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "UI_EVOLUTION_TITLE"
+uppercase = true
+
+[node name="PanelContainer2" type="PanelContainer" parent="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer/VBoxContainer/VBoxContainer2" index="1"]
+margin_top = 90.0
+margin_right = 600.0
+margin_bottom = 150.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="Label" type="Label" parent="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2" index="0"]
+margin_left = 20.0
+margin_right = 540.0
+margin_bottom = 60.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "UI_EVOLUTION_SUBTITLE"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer/VBoxContainer" index="1"]
+margin_top = 154.0
+margin_right = 1430.0
+margin_bottom = 980.0
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer/VBoxContainer/HBoxContainer" index="0"]
+margin_left = 125.0
+margin_top = 183.0
+margin_right = 1001.0
+margin_bottom = 642.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+custom_styles/panel = SubResource( 4 )
+
+[node name="TextureRect" type="TextureRect" parent="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer/VBoxContainer/HBoxContainer/PanelContainer" index="0"]
+margin_right = 876.0
+margin_bottom = 459.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SplashAnimation" type="AnimationPlayer" parent="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer/VBoxContainer/HBoxContainer/PanelContainer/TextureRect" index="0"]
+autoplay = "default"
+playback_speed = 2.0
+anims/default = SubResource( 5 )
+anims/splash = SubResource( 6 )
+
+[node name="MarginContainer" type="MarginContainer" parent="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer/VBoxContainer/HBoxContainer/PanelContainer" index="1"]
+margin_right = 876.0
+margin_bottom = 459.0
+custom_constants/margin_top = -120
+custom_constants/margin_bottom = 70
+
+[node name="MonsterSpriteContainer" parent="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer" index="0" instance=ExtResource( 9 )]
+margin_top = -120.0
+margin_right = 876.0
+margin_bottom = 389.0
+size_flags_horizontal = 3
+min_camera_size = 15.0
+fit_mode = 2
+
+[node name="SpriteContainer" parent="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/MonsterSpriteContainer/Viewport/BattleSlot" index="1"]
+script = ExtResource( 16 )
+aabb = AABB( -3.5, 0, 0, 7, 6, 0 )
+
+[node name="DecoyContainer" parent="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/MonsterSpriteContainer/Viewport/BattleSlot" index="2"]
+script = ExtResource( 16 )
+
+[node name="NameLabel" type="Label" parent="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer/VBoxContainer/HBoxContainer/PanelContainer" index="2"]
+margin_left = 434.0
+margin_top = 399.0
+margin_right = 442.0
+margin_bottom = 459.0
+size_flags_horizontal = 4
+size_flags_vertical = 12
+
+[node name="StatHex" parent="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer/VBoxContainer/HBoxContainer" index="1" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1130.0
+margin_top = 263.0
+margin_right = 1430.0
+margin_bottom = 563.0
+rect_min_size = Vector2( 300, 300 )
+size_flags_horizontal = 4
+size_flags_vertical = 6
+font_color = Color( 1, 1, 1, 1 )
+
+[node name="TapeList" parent="Scroller/OverscanMarginContainer/HBoxContainer" index="1" instance=ExtResource( 15 )]
+anchor_left = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1480.0
+margin_right = 1820.0
+margin_bottom = 1080.0
+
+[node name="BackButtonPanel" parent="." index="3" instance=ExtResource( 4 )]
+margin_left = -445.0
+margin_top = -62.0
+back_text_override = "UI_BUTTON_CLOSE"
+
+[node name="HBoxContainer" parent="BackButtonPanel" index="0"]
+margin_right = 712.0
+
+[node name="EvolutionButton" type="Button" parent="BackButtonPanel/HBoxContainer" index="0"]
+margin_right = 320.0
+margin_bottom = 52.0
+focus_mode = 0
+size_flags_horizontal = 0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
+text = "UI_EVOLUTION_BUTTON"
+flat = true
+expand_icon = true
+script = ExtResource( 2 )
+action = "ui_accept"
+hide_if_disabled = true
+
+[node name="BackButton" parent="BackButtonPanel/HBoxContainer" index="1"]
+margin_left = 384.0
+margin_right = 628.0
+detect_action = true
+
+[node name="MouseBlocker" type="Control" parent="." index="4"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="JingleAudioPlayer" type="AudioStreamPlayer" parent="." index="5"]
+stream = ExtResource( 5 )
+bus = "Music"
+
+[connection signal="tape_button_focus_entered" from="Scroller/OverscanMarginContainer/HBoxContainer/TapeList" to="." method="_on_tape_button_focus_entered"]
+[connection signal="tape_button_pressed" from="Scroller/OverscanMarginContainer/HBoxContainer/TapeList" to="." method="_on_tape_button_pressed"]
+[connection signal="pressed" from="BackButtonPanel/HBoxContainer/EvolutionButton" to="." method="_on_EvolutionButton_pressed"]
+
+[editable path="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/MonsterSpriteContainer"]
+[editable path="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/MonsterSpriteContainer/Viewport/BattleSlot"]
+[editable path="BackButtonPanel"]

@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://menus/menu_bg_fade.shader" type="Shader" id=1]
+[ext_resource path="res://menus/evolution/EvolutionMenu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://mods/zSkele_Bootlegs/shadersoverride/SpriteContainer_ext.gd" type="Script" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/progress = 1.0
+shader_param/max_alpha = 1.0
+shader_param/base_color = Color( 0.1686, 0.1098, 0.2235, 1 )
+shader_param/hi_color = Color( 0.6706, 0.4588, 0.9098, 0.0625 )
+
+[node name="EvolutionMenu" instance=ExtResource( 2 )]
+
+[node name="Blur" parent="." index="0"]
+material = SubResource( 1 )
+
+[node name="SpriteContainer" parent="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/MonsterSpriteContainer/Viewport/BattleSlot" index="1"]
+script = ExtResource( 3 )
+aabb = AABB( -3.5, 0, 0, 7, 6, 0 )
+
+[node name="DecoyContainer" parent="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/MonsterSpriteContainer/Viewport/BattleSlot" index="2"]
+script = ExtResource( 3 )
+
+[editable path="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/MonsterSpriteContainer"]
+[editable path="Scroller/OverscanMarginContainer/HBoxContainer/OverscanMarginContainer/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/MonsterSpriteContainer/Viewport/BattleSlot"]
+[editable path="BackButtonPanel"]
