@@ -7,7 +7,7 @@
 [ext_resource path="res://music/release/battle_captain_vox.ogg" type="AudioStream" id=5]
 [ext_resource path="res://world/objects/grass/grass_emitter.shader" type="Shader" id=6]
 [ext_resource path="res://addons/misc_utils/ExtendedAnimationPlayerFallback.gd" type="Script" id=7]
-[ext_resource path="res://mods/UniqueBootlegPalettes/shadersoverride/alpha_scissor_ext.shader" type="Shader" id=8]
+[ext_resource path="res://tools/palette_extender_30/alpha_scissor_ext.shader" type="Shader" id=8]
 [ext_resource path="res://tools/palette_extender_30/SpriteContainer_ext.gd" type="Script" id=9]
 
 [sub_resource type="ShaderMaterial" id=3]
