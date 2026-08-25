@@ -1,0 +1,1166 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://ui/battle_theme.tres" type="Theme" id=1]
+[ext_resource path="res://tools/palette_extender_30/ExtendedPaletteSetup.gd" type="Script" id=2]
+[ext_resource path="res://battle/backgrounds/BattlePlains.tscn" type="PackedScene" id=3]
+[ext_resource path="res://tools/palette_extender_30/colorpicker.tres" type="Theme" id=4]
+[ext_resource path="res://music/release/battle_captain_vox.ogg" type="AudioStream" id=5]
+[ext_resource path="res://world/objects/grass/grass_emitter.shader" type="Shader" id=6]
+[ext_resource path="res://addons/misc_utils/ExtendedAnimationPlayerFallback.gd" type="Script" id=7]
+[ext_resource path="res://mods/UniqueBootlegPalettes/shadersoverride/alpha_scissor_ext.shader" type="Shader" id=8]
+[ext_resource path="res://tools/palette_extender_30/SpriteContainer_ext.gd" type="Script" id=9]
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 8 )
+
+[sub_resource type="ShaderMaterial" id=4]
+next_pass = SubResource( 3 )
+shader = ExtResource( 8 )
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 6 )
+shader_param/random_seed = 180000
+shader_param/offset = Vector3( 0, 1, 0 )
+shader_param/rows = 7
+shader_param/spacing = 3.0
+shader_param/rand_theta_max = 0.5
+shader_param/rand_flip = true
+shader_param/aabb_min = Vector3( -11, 0, -4 )
+shader_param/aabb_max = Vector3( 11, 4, 4 )
+shader_param/num_frames = 20
+shader_param/frame_odds_curve = 3.0
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 6 )
+shader_param/random_seed = -151380
+shader_param/offset = Vector3( 0, 1, 0 )
+shader_param/rows = 2
+shader_param/spacing = 2.0
+shader_param/rand_theta_max = 0.5
+shader_param/rand_flip = true
+shader_param/aabb_min = Vector3( -2, 0, -1 )
+shader_param/aabb_max = Vector3( 2, 4, 1 )
+shader_param/num_frames = 20
+shader_param/frame_odds_curve = 3.0
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 6 )
+shader_param/random_seed = 11888
+shader_param/offset = Vector3( 0, 1, 0 )
+shader_param/rows = 7
+shader_param/spacing = 2.5
+shader_param/rand_theta_max = 0.5
+shader_param/rand_flip = true
+shader_param/aabb_min = Vector3( -9, 0, -2 )
+shader_param/aabb_max = Vector3( 9, 4, 2 )
+shader_param/num_frames = 20
+shader_param/frame_odds_curve = 3.0
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = ExtResource( 6 )
+shader_param/random_seed = -11676
+shader_param/offset = Vector3( 0, 1, 0 )
+shader_param/rows = 5
+shader_param/spacing = 3.5
+shader_param/rand_theta_max = 0.5
+shader_param/rand_flip = true
+shader_param/aabb_min = Vector3( -9, 0, -3 )
+shader_param/aabb_max = Vector3( 9, 4, 3 )
+shader_param/num_frames = 20
+shader_param/frame_odds_curve = 3.0
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = ExtResource( 6 )
+shader_param/random_seed = 70612
+shader_param/offset = Vector3( 0, 1, 0 )
+shader_param/rows = 7
+shader_param/spacing = 2.5
+shader_param/rand_theta_max = 0.5
+shader_param/rand_flip = true
+shader_param/aabb_min = Vector3( -9, 0, -3 )
+shader_param/aabb_max = Vector3( 9, 4, 3 )
+shader_param/num_frames = 20
+shader_param/frame_odds_curve = 3.0
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = ExtResource( 6 )
+shader_param/random_seed = 230300
+shader_param/offset = Vector3( 0, 1, 0 )
+shader_param/rows = 7
+shader_param/spacing = 2.5
+shader_param/rand_theta_max = 0.5
+shader_param/rand_flip = true
+shader_param/aabb_min = Vector3( -9, 0, -3 )
+shader_param/aabb_max = Vector3( 9, 4, 3 )
+shader_param/num_frames = 20
+shader_param/frame_odds_curve = 3.0
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = ExtResource( 6 )
+shader_param/random_seed = 142908
+shader_param/offset = Vector3( 0, 1, 0 )
+shader_param/rows = 2
+shader_param/spacing = 2.5
+shader_param/rand_theta_max = 0.5
+shader_param/rand_flip = true
+shader_param/aabb_min = Vector3( -3, 0, -2 )
+shader_param/aabb_max = Vector3( 3, 4, 2 )
+shader_param/num_frames = 20
+shader_param/frame_odds_curve = 3.0
+
+[sub_resource type="ShaderMaterial" id=12]
+shader = ExtResource( 6 )
+shader_param/random_seed = -120996
+shader_param/offset = Vector3( 0, 1, 0 )
+shader_param/rows = 2
+shader_param/spacing = 3.0
+shader_param/rand_theta_max = 0.5
+shader_param/rand_flip = true
+shader_param/aabb_min = Vector3( -4, 0, -3 )
+shader_param/aabb_max = Vector3( 4, 4, 3 )
+shader_param/num_frames = 20
+shader_param/frame_odds_curve = 3.0
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = ExtResource( 6 )
+shader_param/random_seed = -99304
+shader_param/offset = Vector3( 0, 1, 0 )
+shader_param/rows = 3
+shader_param/spacing = 5.0
+shader_param/rand_theta_max = 0.5
+shader_param/rand_flip = true
+shader_param/aabb_min = Vector3( -8, 0, -10 )
+shader_param/aabb_max = Vector3( 8, 4, 10 )
+shader_param/num_frames = 20
+shader_param/frame_odds_curve = 3.0
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 1 )
+border_color = Color( 0.137255, 0.137255, 0.137255, 1 )
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_size = 5
+shadow_offset = Vector2( 5, 5 )
+
+[node name="ExtendedPaletteSetup" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 1920, 1080 )
+handle_input_locally = false
+render_target_update_mode = 3
+shadow_atlas_size = 1
+
+[node name="Background" parent="ViewportContainer/Viewport" instance=ExtResource( 3 )]
+
+[node name="GridMap" parent="ViewportContainer/Viewport/Background" index="0"]
+data = {
+"cells": PoolIntArray( -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 0, 0, -65529, 0, 0, -65528, 0, 0, -65527, 0, 0, -65526, 0, 0, -65525, 0, 0, -65524, 0, 0, -65523, 0, 0, -65522, 0, 0, -65521, 0, 0, -65520, 0, 0, -65519, 0, 0, -65518, 0, 0, -65517, 0, 0, -20, 0, 0, -19, 0, 0, -18, 0, 0, -17, 0, 0, -16, 0, 0, -15, 0, 0, -14, 0, 0, -13, 0, 0, -12, 0, 0, -11, 0, 0, -10, 0, 0, -9, 0, 0, -8, 0, 0, -7, 0, 0, -6, 0, 0, -5, 0, 0, -4, 0, 0, -3, 0, 0, -2, 0, 0, -1, 0, 0, -65536, 1, 655362, -65535, 1, 655362, -65534, 1, 655362, -65533, 1, 655362, -65532, 1, 655363, -65531, 1, 655364, -65530, 1, 655362, -65529, 1, 655362, -65528, 1, 655362, -65527, 1, 655362, -65526, 1, 655362, -65525, 1, 655362, -65524, 1, 655362, -65523, 1, 655364, -65522, 1, 655362, -65521, 1, 655362, -65520, 1, 655362, -65519, 1, 655362, -65518, 1, 655362, -65517, 1, 655362, -20, 1, 655362, -19, 1, 655362, -18, 1, 655362, -17, 1, 655362, -16, 1, 655362, -15, 1, 655362, -14, 1, 655362, -13, 1, 655362, -12, 1, 655362, -11, 1, 655362, -10, 1, 655362, -9, 1, 655362, -8, 1, 655362, -7, 1, 655362, -6, 1, 655362, -5, 1, 655362, -4, 1, 655362, -3, 1, 655362, -2, 1, 655364, -1, 1, 655362, -65536, 2, 2, -65535, 2, 3, -65534, 2, 4, -65533, 2, 2, -65532, 2, 2, -65531, 2, 2, -65530, 2, 2, -65529, 2, 2, -65528, 2, 2, -65527, 2, 2, -65526, 2, 2, -65525, 2, 2, -65524, 2, 2, -65523, 2, 3, -65522, 2, 4, -65521, 2, 2, -65520, 2, 2, -65519, 2, 2, -65518, 2, 2, -65517, 2, 2, -20, 2, 2, -19, 2, 2, -18, 2, 2, -17, 2, 2, -16, 2, 2, -15, 2, 2, -14, 2, 2, -13, 2, 2, -12, 2, 2, -11, 2, 2, -10, 2, 2, -9, 2, 2, -8, 2, 2, -7, 2, 2, -6, 2, 2, -5, 2, 2, -4, 2, 2, -3, 2, 2, -2, 2, 2, -1, 2, 3, -65536, 3, 0, -65535, 3, 1, -65534, 3, 0, -65533, 3, 0, -65532, 3, 0, -65531, 3, 0, -65530, 3, 0, -65529, 3, 0, -65528, 3, 0, -65527, 3, 0, -65526, 3, 0, -65525, 3, 0, -65524, 3, 0, -65523, 3, 0, -65522, 3, 0, -65521, 3, 0, -65520, 3, 0, -65519, 3, 0, -65518, 3, 0, -65517, 3, 0, -20, 3, 0, -19, 3, 0, -18, 3, 0, -17, 3, 0, -16, 3, 0, -15, 3, 0, -14, 3, 0, -13, 3, 0, -12, 3, 0, -11, 3, 0, -10, 3, 0, -9, 3, 0, -8, 3, 0, -7, 3, 0, -6, 3, 0, -5, 3, 0, -4, 3, 0, -3, 3, 0, -2, 3, 0, -1, 3, 0, 65524, 4, 655373, 65525, 4, 655373, 65526, 4, 655373, 65527, 4, 13, -65536, 4, 0, -65535, 4, 0, -65534, 4, 0, -65533, 4, 0, -65532, 4, 0, -65531, 4, 0, -65530, 4, 0, -65529, 4, 0, -65528, 4, 0, -65527, 4, 0, -65526, 4, 0, -65525, 4, 0, -65524, 4, 0, -65523, 4, 0, -65522, 4, 0, -65521, 4, 0, -65520, 4, 0, -65519, 4, 0, -65518, 4, 0, -65517, 4, 0, -20, 4, 0, -19, 4, 0, -18, 4, 0, -17, 4, 0, -16, 4, 0, -15, 4, 0, -14, 4, 0, -13, 4, 0, -12, 4, 0, -11, 4, 0, -10, 4, 0, -9, 4, 0, -8, 4, 0, -7, 4, 0, -6, 4, 0, -5, 4, 0, -4, 4, 14, -3, 4, 0, -2, 4, 0, -1, 4, 0, -65536, 5, 0, -65535, 5, 0, -65534, 5, 0, -65533, 5, 0, -65532, 5, 0, -65531, 5, 0, -65530, 5, 0, -65529, 5, 1441806, -65528, 5, 0, -65527, 5, 0, -65526, 5, 0, -65525, 5, 0, -65524, 5, 0, -65523, 5, 0, -65522, 5, 0, -65521, 5, 0, -65520, 5, 0, -65519, 5, 0, -65518, 5, 0, -65517, 5, 0, -20, 5, 0, -19, 5, 0, -18, 5, 0, -17, 5, 0, -16, 5, 0, -15, 5, 0, -14, 5, 0, -13, 5, 0, -12, 5, 0, -11, 5, 0, -10, 5, 0, -9, 5, 0, -8, 5, 0, -7, 5, 0, -6, 5, 0, -5, 5, 0, -4, 5, 0, -3, 5, 0, -2, 5, 0, -1, 5, 0, 1, 6, 655367, 2, 6, 655365, 3, 6, 655366, 4, 6, 655365, 5, 6, 1048583, -65536, 6, 0, -65535, 6, 0, -65534, 6, 0, -65533, 6, 0, -65532, 6, 0, -65531, 6, 0, -65530, 6, 0, -65529, 6, 0, -65528, 6, 0, -65527, 6, 0, -65526, 6, 0, -65525, 6, 0, -65524, 6, 0, -65523, 6, 0, -65522, 6, 0, -65521, 6, 0, -65520, 6, 0, -65519, 6, 0, -65518, 6, 0, -65517, 6, 0, -20, 6, 0, -19, 6, 0, -18, 6, 0, -17, 6, 0, -16, 6, 0, -15, 6, 0, -14, 6, 0, -13, 6, 0, -12, 6, 0, -11, 6, 0, -10, 6, 0, -9, 6, 0, -8, 6, 0, -7, 6, 0, -6, 6, 0, -5, 6, 0, -4, 6, 0, -3, 6, 0, -2, 6, 0, -1, 6, 0, 1, 7, 1441797, 2, 7, 1048590, 3, 7, 1048576, 4, 7, 1048576, 5, 7, 1048581, -65536, 7, 0, -65535, 7, 0, -65534, 7, 0, -65533, 7, 0, -65532, 7, 0, -65531, 7, 0, -65530, 7, 0, -65529, 7, 0, -65528, 7, 0, -65527, 7, 0, -65526, 7, 0, -65525, 7, 0, -65524, 7, 0, -65523, 7, 0, -65522, 7, 0, -65521, 7, 0, -65520, 7, 0, -65519, 7, 0, -65518, 7, 0, -65517, 7, 0, -20, 7, 0, -19, 7, 0, -18, 7, 0, -17, 7, 0, -16, 7, 0, -15, 7, 0, -14, 7, 0, -13, 7, 0, -12, 7, 0, -11, 7, 0, -10, 7, 0, -9, 7, 0, -8, 7, 0, -7, 7, 0, -6, 7, 0, -5, 7, 0, -4, 7, 0, -3, 7, 0, -2, 7, 0, -1, 7, 0, 1, 8, 1441799, 2, 8, 5, 3, 8, 5, 4, 8, 6, 5, 8, 7, -65536, 8, 0, -65535, 8, 0, -65534, 8, 0, -65533, 8, 0, -65532, 8, 0, -65531, 8, 0, -65530, 8, 0, -65529, 8, 0, -65528, 8, 0, -65527, 8, 0, -65526, 8, 0, -65525, 8, 0, -65524, 8, 0, -65523, 8, 0, -65522, 8, 0, -65521, 8, 0, -65520, 8, 0, -65519, 8, 0, -65518, 8, 0, -65517, 8, 0, -20, 8, 0, -19, 8, 0, -18, 8, 0, -17, 8, 0, -16, 8, 0, -15, 8, 0, -14, 8, 0, -13, 8, 0, -12, 8, 0, -11, 8, 0, -10, 8, 0, -9, 8, 0, -8, 8, 0, -7, 8, 0, -6, 8, 0, -5, 8, 0, -4, 8, 0, -3, 8, 0, -2, 8, 0, -1, 8, 0, -65536, 9, 0, -65535, 9, 0, -65534, 9, 0, -65533, 9, 0, -65532, 9, 0, -65531, 9, 0, -65530, 9, 0, -65529, 9, 0, -65528, 9, 0, -65527, 9, 0, -65526, 9, 0, -65525, 9, 0, -65524, 9, 0, -65523, 9, 0, -65522, 9, 0, -65521, 9, 0, -65520, 9, 0, -65519, 9, 0, -65518, 9, 0, -65517, 9, 0, -20, 9, 0, -19, 9, 0, -18, 9, 0, -17, 9, 0, -16, 9, 0, -15, 9, 0, -14, 9, 0, -13, 9, 0, -12, 9, 0, -11, 9, 0, -10, 9, 0, -9, 9, 0, -8, 9, 0, -7, 9, 0, -6, 9, 0, -5, 9, 0, -4, 9, 0, -3, 9, 0, -2, 9, 0, -1, 9, 0, -65536, 10, 0, -65535, 10, 0, -65534, 10, 0, -65533, 10, 0, -65532, 10, 0, -65531, 10, 0, -65530, 10, 0, -65529, 10, 0, -65528, 10, 0, -65527, 10, 0, -65526, 10, 0, -65525, 10, 0, -65524, 10, 0, -65523, 10, 0, -65522, 10, 0, -65521, 10, 0, -65520, 10, 0, -65519, 10, 0, -65518, 10, 0, -65517, 10, 0, -20, 10, 0, -19, 10, 0, -18, 10, 0, -17, 10, 0, -16, 10, 0, -15, 10, 0, -14, 10, 0, -13, 10, 0, -12, 10, 0, -11, 10, 0, -10, 10, 0, -9, 10, 0, -8, 10, 0, -7, 10, 0, -6, 10, 0, -5, 10, 0, -4, 10, 0, -3, 10, 0, -2, 10, 0, -1, 10, 0, 16, 65522, 0, 17, 65522, 0, 18, 65522, 0, 19, 65522, 0, 20, 65522, 1048581, 65515, 65522, 1441797, 65524, 65522, 1441792, 65525, 65522, 1441792, 65526, 65522, 1441792, 65536, 65522, 1441792, 65537, 65522, 1441792, 65538, 65522, 1441792, 65539, 65522, 1441792, 65540, 65522, 1441792, 65541, 65522, 1441792, 65542, 65522, 1441792, 131051, 65522, 1441797, 131052, 65522, 0, 131053, 65522, 0, 131054, 65522, 0, 131055, 65522, 0, 131056, 65522, 1048576, 131057, 65522, 1048576, 131058, 65522, 1048576, 131059, 65522, 1048576, 131060, 65522, 0, 131061, 65522, 0, 131062, 65522, 0, 131063, 65522, 1441792, 131064, 65522, 1441792, 131065, 65522, 1441792, 131066, 65522, 1441792, 131070, 65522, 1441792, 131071, 65522, 1441792, 131072, 65522, 0, 131073, 65522, 0, 131074, 65522, 1048581, 131078, 65522, 1441797, 131079, 65522, 1441792, 131080, 65522, 1441792, 131081, 65522, 1441792, 131082, 65522, 1441792, 131083, 65522, 1441792, 131084, 65522, 1441792, 131085, 65522, 1441792, 131086, 65522, 1441792, 131087, 65522, 0, 131088, 65522, 1048585, 196602, 65522, 1441797, 196603, 65522, 0, 196604, 65522, 0, 196605, 65522, 0, 196606, 65522, 0, 196607, 65522, 0, 16, 65523, 0, 17, 65523, 0, 18, 65523, 0, 19, 65523, 0, 20, 65523, 1048581, 65515, 65523, 1441797, 65524, 65523, 1441792, 65525, 65523, 1441792, 65526, 65523, 1441792, 65527, 65523, 1441792, 65528, 65523, 1441792, 65536, 65523, 1441792, 65537, 65523, 1441792, 65538, 65523, 1441792, 65539, 65523, 1441792, 65540, 65523, 1441792, 65541, 65523, 1441792, 65542, 65523, 1441792, 131051, 65523, 1441797, 131052, 65523, 0, 131053, 65523, 0, 131054, 65523, 0, 131055, 65523, 0, 131056, 65523, 1048576, 131057, 65523, 1048576, 131058, 65523, 1048576, 131059, 65523, 1048576, 131060, 65523, 0, 131061, 65523, 0, 131062, 65523, 0, 131063, 65523, 1441792, 131064, 65523, 1441792, 131065, 65523, 1441792, 131066, 65523, 1441792, 131070, 65523, 1441792, 131071, 65523, 1441792, 131072, 65523, 6, 131073, 65523, 5, 131074, 65523, 7, 131078, 65523, 1441797, 131079, 65523, 1441792, 131080, 65523, 1441792, 131081, 65523, 1441792, 131082, 65523, 1441792, 131083, 65523, 1441792, 131084, 65523, 1441792, 131085, 65523, 1441792, 131086, 65523, 1441792, 131087, 65523, 0, 131088, 65523, 1048585, 196602, 65523, 1441797, 196603, 65523, 0, 196604, 65523, 0, 196605, 65523, 0, 196606, 65523, 8, 196607, 65523, 5, 16, 65524, 0, 17, 65524, 0, 18, 65524, 0, 19, 65524, 0, 20, 65524, 1048581, 65515, 65524, 1441797, 65524, 65524, 0, 65525, 65524, 0, 65526, 65524, 0, 65527, 65524, 0, 65528, 65524, 0, 65536, 65524, 0, 65537, 65524, 12, 65538, 65524, 9, 65539, 65524, 10, 65540, 65524, 1441804, 65541, 65524, 0, 65542, 65524, 0, 131051, 65524, 1441797, 131052, 65524, 0, 131053, 65524, 0, 131054, 65524, 0, 131055, 65524, 0, 131056, 65524, 1048576, 131057, 65524, 1048576, 131058, 65524, 1048576, 131059, 65524, 1048576, 131060, 65524, 8, 131061, 65524, 5, 131062, 65524, 5, 131063, 65524, 6, 131064, 65524, 1441800, 131065, 65524, 0, 131066, 65524, 0, 131067, 65524, 0, 131068, 65524, 0, 131069, 65524, 0, 131070, 65524, 0, 131071, 65524, 0, 131078, 65524, 1441797, 131079, 65524, 1441792, 131080, 65524, 1441792, 131081, 65524, 1441792, 131082, 65524, 1441792, 131083, 65524, 1441792, 131084, 65524, 1441792, 131085, 65524, 1441792, 131086, 65524, 1441792, 131087, 65524, 0, 131088, 65524, 1048585, 196602, 65524, 1441798, 196603, 65524, 1441792, 196604, 65524, 1441792, 196605, 65524, 1441792, 196606, 65524, 1048582, -65535, 65524, 0, -65534, 65524, 0, -65533, 65524, 0, -65532, 65524, 0, 16, 65525, 0, 17, 65525, 0, 18, 65525, 0, 19, 65525, 0, 20, 65525, 1048581, 65515, 65525, 1441797, 65516, 65525, 0, 65517, 65525, 0, 65518, 65525, 0, 65519, 65525, 0, 65524, 65525, 0, 65525, 65525, 0, 65526, 65525, 0, 65527, 65525, 0, 65528, 65525, 0, 65536, 65525, 0, 65537, 65525, 1048585, 65540, 65525, 1441801, 65541, 65525, 0, 65542, 65525, 0, 131051, 65525, 1441799, 131052, 65525, 5, 131053, 65525, 5, 131054, 65525, 5, 131055, 65525, 1441800, 131056, 65525, 1048576, 131057, 65525, 1048576, 131058, 65525, 1048576, 131059, 65525, 1048576, 131060, 65525, 1048582, 131064, 65525, 1441797, 131065, 65525, 0, 131066, 65525, 0, 131067, 65525, 0, 131068, 65525, 0, 131069, 65525, 0, 131070, 65525, 0, 131071, 65525, 0, 131078, 65525, 1441797, 131079, 65525, 0, 131080, 65525, 0, 131081, 65525, 0, 131082, 65525, 0, 131083, 65525, 0, 131084, 65525, 0, 131085, 65525, 0, 131086, 65525, 0, 131087, 65525, 0, 131088, 65525, 1048585, 196602, 65525, 1441798, 196603, 65525, 1441792, 196604, 65525, 1441792, 196605, 65525, 1441792, 196606, 65525, 1048582, -65535, 65525, 1048576, -65534, 65525, 1048576, -65533, 65525, 1048576, -65532, 65525, 1048576, 16, 65526, 0, 17, 65526, 0, 18, 65526, 0, 19, 65526, 0, 20, 65526, 1048581, 65515, 65526, 1441797, 65516, 65526, 0, 65517, 65526, 0, 65518, 65526, 0, 65519, 65526, 0, 65524, 65526, 0, 65525, 65526, 0, 65526, 65526, 0, 65527, 65526, 0, 65528, 65526, 0, 65536, 65526, 0, 65537, 65526, 1048586, 65540, 65526, 1441802, 65541, 65526, 0, 65542, 65526, 0, 131055, 65526, 1441797, 131056, 65526, 1048576, 131057, 65526, 1048576, 131058, 65526, 1048576, 131059, 65526, 1048576, 131060, 65526, 1048582, 131064, 65526, 1441797, 131065, 65526, 0, 131066, 65526, 0, 131067, 65526, 0, 131068, 65526, 0, 131069, 65526, 0, 131070, 65526, 0, 131071, 65526, 0, 131078, 65526, 1441797, 131079, 65526, 0, 131080, 65526, 0, 131081, 65526, 0, 131082, 65526, 0, 131083, 65526, 0, 131084, 65526, 0, 131085, 65526, 0, 131086, 65526, 0, 131087, 65526, 0, 131088, 65526, 1048585, 196591, 65526, 655371, 196592, 65526, 655370, 196593, 65526, 655370, 196594, 65526, 655370, 196595, 65526, 655370, 196596, 65526, 1048587, 196602, 65526, 1441798, 196603, 65526, 1441792, 196604, 65526, 1441792, 196605, 65526, 1441792, 196606, 65526, 1048582, -65535, 65526, 655360, -65534, 65526, 655360, -65533, 65526, 655360, -65532, 65526, 655360, 16, 65527, 0, 17, 65527, 0, 18, 65527, 0, 19, 65527, 0, 20, 65527, 1048581, 65515, 65527, 1441797, 65516, 65527, 0, 65517, 65527, 0, 65518, 65527, 0, 65519, 65527, 0, 65524, 65527, 0, 65525, 65527, 0, 65526, 65527, 0, 65527, 65527, 0, 65528, 65527, 0, 65529, 65527, 0, 65530, 65527, 0, 65531, 65527, 0, 65532, 65527, 0, 65536, 65527, 1441792, 65537, 65527, 1048586, 65540, 65527, 1441802, 65541, 65527, 1441792, 65542, 65527, 1441792, 131064, 65527, 1441798, 131065, 65527, 1441792, 131066, 65527, 1441792, 131067, 65527, 1441792, 131068, 65527, 1441792, 131069, 65527, 1441792, 131070, 65527, 1441792, 131071, 65527, 1441792, 131078, 65527, 1441798, 131079, 65527, 1441792, 131080, 65527, 0, 131081, 65527, 0, 131082, 65527, 0, 131083, 65527, 0, 131084, 65527, 0, 131085, 65527, 0, 131086, 65527, 0, 131087, 65527, 0, 131088, 65527, 1048585, 196591, 65527, 1441801, 196592, 65527, 1441792, 196593, 65527, 1441792, 196594, 65527, 1441792, 196595, 65527, 1441792, 196596, 65527, 1048586, 196602, 65527, 1441799, 196603, 65527, 5, 196604, 65527, 6, 196605, 65527, 6, 196606, 65527, 7, -65536, 65527, 0, -65535, 65527, 0, -65534, 65527, 0, -65533, 65527, 0, -65532, 65527, 0, -65531, 65527, 0, -65530, 65527, 0, -65529, 65527, 0, -65528, 65527, 0, -65527, 65527, 0, -65526, 65527, 0, -65525, 65527, 0, -65524, 65527, 0, -12, 65527, 0, -11, 65527, 0, -10, 65527, 0, -9, 65527, 0, -8, 65527, 0, -7, 65527, 0, -6, 65527, 0, -5, 65527, 0, -4, 65527, 0, -3, 65527, 0, -2, 65527, 0, -1, 65527, 0, 16, 65528, 0, 17, 65528, 0, 18, 65528, 0, 19, 65528, 0, 20, 65528, 1048581, 65515, 65528, 1441797, 65516, 65528, 0, 65517, 65528, 0, 65518, 65528, 0, 65519, 65528, 0, 65524, 65528, 0, 65525, 65528, 0, 65526, 65528, 0, 65527, 65528, 0, 65528, 65528, 0, 65529, 65528, 0, 65530, 65528, 1441792, 65531, 65528, 1441792, 65532, 65528, 1441792, 65536, 65528, 1441792, 65537, 65528, 1048585, 65540, 65528, 1441801, 65541, 65528, 1441792, 65542, 65528, 1441792, 131064, 65528, 1441798, 131065, 65528, 1441792, 131066, 65528, 1441792, 131067, 65528, 1441792, 131068, 65528, 1441792, 131069, 65528, 1441792, 131070, 65528, 1441792, 131071, 65528, 1441792, 131078, 65528, 1441798, 131079, 65528, 1441792, 131080, 65528, 0, 131081, 65528, 0, 131082, 65528, 0, 131083, 65528, 0, 131084, 65528, 0, 131085, 65528, 0, 131086, 65528, 0, 131087, 65528, 0, 131088, 65528, 1048585, 196591, 65528, 1441801, 196592, 65528, 1441792, 196593, 65528, 1441792, 196594, 65528, 1441792, 196595, 65528, 1441792, 196596, 65528, 1048585, -65536, 65528, 0, -65535, 65528, 0, -65534, 65528, 0, -65533, 65528, 1441793, -65532, 65528, 0, -65531, 65528, 0, -65530, 65528, 0, -65529, 65528, 0, -65528, 65528, 0, -65527, 65528, 0, -65526, 65528, 0, -65525, 65528, 0, -65524, 65528, 0, -12, 65528, 0, -11, 65528, 0, -10, 65528, 0, -9, 65528, 0, -8, 65528, 0, -7, 65528, 0, -6, 65528, 0, -5, 65528, 0, -4, 65528, 0, -3, 65528, 0, -2, 65528, 0, -1, 65528, 0, 16, 65529, 0, 17, 65529, 0, 18, 65529, 0, 19, 65529, 0, 20, 65529, 1048581, 65515, 65529, 1441797, 65516, 65529, 0, 65517, 65529, 0, 65518, 65529, 0, 65519, 65529, 0, 65524, 65529, 0, 65525, 65529, 0, 65526, 65529, 0, 65527, 65529, 0, 65528, 65529, 0, 65529, 65529, 0, 65530, 65529, 1441792, 65531, 65529, 1441792, 65532, 65529, 1441792, 65533, 65529, 1441792, 65534, 65529, 1441792, 65535, 65529, 1048581, 65536, 65529, 1441792, 65537, 65529, 1048586, 65540, 65529, 1441803, 65541, 65529, 1441804, 65542, 65529, 1441792, 131064, 65529, 1441798, 131065, 65529, 1441792, 131066, 65529, 1441792, 131067, 65529, 1441792, 131068, 65529, 1441792, 131069, 65529, 1441792, 131070, 65529, 1441792, 131071, 65529, 1441792, 131078, 65529, 1441798, 131079, 65529, 1441792, 131080, 65529, 0, 131081, 65529, 0, 131082, 65529, 0, 131083, 65529, 0, 131084, 65529, 0, 131085, 65529, 0, 131086, 65529, 0, 131087, 65529, 0, 131088, 65529, 1048585, 196591, 65529, 1441801, 196592, 65529, 1441792, 196593, 65529, 1441792, 196594, 65529, 1441792, 196595, 65529, 1441792, 196596, 65529, 1048586, -65536, 65529, 0, -65535, 65529, 0, -65534, 65529, 0, -65533, 65529, 0, -65532, 65529, 0, -65531, 65529, 0, -65530, 65529, 0, -65529, 65529, 0, -65528, 65529, 0, -65527, 65529, 0, -65526, 65529, 0, -65525, 65529, 0, -65524, 65529, 0, -12, 65529, 0, -11, 65529, 0, -10, 65529, 0, -9, 65529, 0, -8, 65529, 0, -7, 65529, 0, -6, 65529, 0, -5, 65529, 0, -4, 65529, 0, -3, 65529, 0, -2, 65529, 0, -1, 65529, 0, 16, 65530, 0, 17, 65530, 0, 18, 65530, 0, 19, 65530, 0, 20, 65530, 1048581, 65515, 65530, 1441797, 65516, 65530, 0, 65517, 65530, 0, 65518, 65530, 0, 65519, 65530, 0, 65520, 65530, 1048576, 65521, 65530, 1048576, 65522, 65530, 1048576, 65523, 65530, 0, 65524, 65530, 0, 65525, 65530, 0, 65526, 65530, 0, 65527, 65530, 0, 65528, 65530, 0, 65529, 65530, 0, 65530, 65530, 1441792, 65531, 65530, 1441792, 65532, 65530, 1441792, 65533, 65530, 1441792, 65534, 65530, 1441792, 65535, 65530, 1048581, 65536, 65530, 1441792, 65537, 65530, 1048586, 65541, 65530, 1441801, 65542, 65530, 1441792, 131056, 65530, 1441797, 131057, 65530, 1441792, 131058, 65530, 1441792, 131059, 65530, 1048581, 131064, 65530, 1441798, 131065, 65530, 1441792, 131066, 65530, 1441792, 131067, 65530, 1441792, 131068, 65530, 1441792, 131069, 65530, 1441792, 131070, 65530, 1441792, 131071, 65530, 1441792, 131078, 65530, 1441798, 131079, 65530, 1441792, 131080, 65530, 1441792, 131081, 65530, 1441792, 131082, 65530, 1441792, 131083, 65530, 1441792, 131084, 65530, 1441792, 131085, 65530, 1441792, 131086, 65530, 1441792, 131087, 65530, 0, 131088, 65530, 1048585, 196591, 65530, 1441803, 196592, 65530, 10, 196593, 65530, 9, 196594, 65530, 9, 196595, 65530, 10, 196596, 65530, 11, -65536, 65530, 0, -65535, 65530, 0, -65534, 65530, 0, -65533, 65530, 0, -65532, 65530, 0, -65531, 65530, 0, -65530, 65530, 0, -65529, 65530, 0, -65528, 65530, 0, -65527, 65530, 0, -65526, 65530, 0, -65525, 65530, 0, -65524, 65530, 0, -13, 65530, 0, -12, 65530, 0, -11, 65530, 0, -10, 65530, 0, -9, 65530, 0, -8, 65530, 0, -7, 65530, 0, -6, 65530, 0, -5, 65530, 0, -4, 65530, 0, -3, 65530, 0, -2, 65530, 0, -1, 65530, 0, 16, 65531, 0, 17, 65531, 0, 18, 65531, 0, 19, 65531, 0, 20, 65531, 1048581, 65515, 65531, 1441797, 65516, 65531, 0, 65517, 65531, 0, 65518, 65531, 0, 65519, 65531, 0, 65520, 65531, 1048576, 65521, 65531, 1048576, 65522, 65531, 1048576, 65523, 65531, 0, 65524, 65531, 0, 65525, 65531, 0, 65526, 65531, 0, 65527, 65531, 0, 65528, 65531, 0, 65529, 65531, 0, 65530, 65531, 1441792, 65531, 65531, 1441792, 65532, 65531, 1441792, 65533, 65531, 1441792, 65534, 65531, 1441792, 65535, 65531, 1048581, 65536, 65531, 10, 65537, 65531, 11, 65541, 65531, 1441801, 65542, 65531, 1441792, 65543, 65531, 1441792, 65544, 65531, 1441792, 65545, 65531, 1441792, 65546, 65531, 0, 65547, 65531, 1441792, 65548, 65531, 1441792, 65549, 65531, 1441792, 65550, 65531, 0, 65551, 65531, 0, 65552, 65531, 1048581, 131056, 65531, 1441799, 131057, 65531, 5, 131058, 65531, 5, 131059, 65531, 7, 131064, 65531, 1441798, 131065, 65531, 1441806, 131066, 65531, 1441792, 131067, 65531, 1441792, 131068, 65531, 8, 131069, 65531, 6, 131070, 65531, 6, 131071, 65531, 9, 131078, 65531, 1441799, 131079, 65531, 5, 131080, 65531, 6, 131081, 65531, 5, 131082, 65531, 5, 131083, 65531, 6, 131084, 65531, 5, 131085, 65531, 5, 131086, 65531, 5, 131087, 65531, 5, 131088, 65531, 7, -65536, 65531, 0, -65535, 65531, 0, -65534, 65531, 0, -65533, 65531, 0, -65532, 65531, 0, -65531, 65531, 0, -65530, 65531, 0, -65529, 65531, 0, -65528, 65531, 0, -65527, 65531, 0, -65526, 65531, 0, -65525, 65531, 0, -65524, 65531, 0, -13, 65531, 0, -12, 65531, 0, -11, 65531, 0, -10, 65531, 0, -9, 65531, 0, -8, 65531, 0, -7, 65531, 0, -6, 65531, 0, -5, 65531, 0, -4, 65531, 0, -3, 65531, 0, -2, 65531, 0, -1, 65531, 0, 6, 65532, 1441797, 7, 65532, 1441792, 8, 65532, 1441792, 9, 65532, 1441792, 10, 65532, 1441792, 11, 65532, 1441792, 12, 65532, 1441792, 13, 65532, 0, 14, 65532, 0, 15, 65532, 0, 16, 65532, 0, 17, 65532, 0, 18, 65532, 0, 19, 65532, 0, 20, 65532, 1048581, 65515, 65532, 1441797, 65516, 65532, 0, 65517, 65532, 0, 65518, 65532, 0, 65519, 65532, 0, 65520, 65532, 1048576, 65521, 65532, 1048576, 65522, 65532, 1048590, 65523, 65532, 0, 65524, 65532, 0, 65525, 65532, 0, 65526, 65532, 0, 65527, 65532, 0, 65528, 65532, 0, 65529, 65532, 0, 65530, 65532, 1441792, 65531, 65532, 1441792, 65532, 65532, 1441792, 65533, 65532, 1441806, 65534, 65532, 1441792, 65535, 65532, 1048582, 65541, 65532, 1441803, 65542, 65532, 9, 65543, 65532, 9, 65544, 65532, 1441800, 65545, 65532, 0, 65546, 65532, 0, 65547, 65532, 8, 65548, 65532, 5, 65549, 65532, 6, 65550, 65532, 5, 65551, 65532, 5, 65552, 65532, 7, 131064, 65532, 1441799, 131065, 65532, 6, 131066, 65532, 6, 131067, 65532, 5, 131068, 65532, 7, -65536, 65532, 0, -65535, 65532, 0, -65534, 65532, 0, -65533, 65532, 0, -65532, 65532, 0, -65531, 65532, 0, -65530, 65532, 1048590, -65529, 65532, 0, -65528, 65532, 0, -65527, 65532, 0, -65526, 65532, 0, -65525, 65532, 0, -65524, 65532, 0, -13, 65532, 0, -12, 65532, 0, -11, 65532, 0, -10, 65532, 0, -9, 65532, 0, -8, 65532, 0, -7, 65532, 0, -6, 65532, 0, -5, 65532, 0, -4, 65532, 0, -3, 65532, 0, -2, 65532, 0, -1, 65532, 0, 6, 65533, 1441797, 7, 65533, 14, 8, 65533, 1441792, 9, 65533, 1441792, 10, 65533, 1441792, 11, 65533, 1441792, 12, 65533, 1441792, 13, 65533, 0, 14, 65533, 0, 15, 65533, 0, 16, 65533, 0, 17, 65533, 0, 18, 65533, 0, 19, 65533, 0, 20, 65533, 1048581, 65515, 65533, 1441799, 65516, 65533, 5, 65517, 65533, 5, 65518, 65533, 5, 65519, 65533, 5, 65520, 65533, 6, 65521, 65533, 6, 65522, 65533, 6, 65523, 65533, 5, 65524, 65533, 5, 65525, 65533, 5, 65526, 65533, 6, 65527, 65533, 5, 65528, 65533, 6, 65529, 65533, 6, 65530, 65533, 6, 65531, 65533, 5, 65532, 65533, 6, 65533, 65533, 5, 65534, 65533, 6, 65535, 65533, 7, 65544, 65533, 1441799, 65545, 65533, 6, 65546, 65533, 5, 65547, 65533, 7, -65536, 65533, 0, -65535, 65533, 0, -65534, 65533, 0, -65533, 65533, 0, -65532, 65533, 0, -65531, 65533, 0, -65530, 65533, 0, -65529, 65533, 0, -65528, 65533, 0, -65527, 65533, 0, -65526, 65533, 0, -65525, 65533, 0, -65524, 65533, 0, -20, 65533, 0, -19, 65533, 0, -18, 65533, 0, -17, 65533, 0, -16, 65533, 0, -15, 65533, 0, -14, 65533, 0, -13, 65533, 0, -12, 65533, 0, -11, 65533, 0, -10, 65533, 0, -9, 65533, 0, -8, 65533, 0, -7, 65533, 0, -6, 65533, 0, -5, 65533, 0, -4, 65533, 0, -3, 65533, 0, -2, 65533, 0, -1, 65533, 0, 6, 65534, 1441799, 7, 65534, 5, 8, 65534, 6, 9, 65534, 5, 10, 65534, 5, 11, 65534, 6, 12, 65534, 6, 13, 65534, 5, 14, 65534, 5, 15, 65534, 5, 16, 65534, 5, 17, 65534, 5, 18, 65534, 5, 19, 65534, 5, 20, 65534, 7, -65536, 65534, 0, -65535, 65534, 0, -65534, 65534, 0, -65533, 65534, 0, -65532, 65534, 0, -65531, 65534, 0, -65530, 65534, 0, -65529, 65534, 0, -65528, 65534, 0, -65527, 65534, 0, -65526, 65534, 0, -65525, 65534, 0, -65524, 65534, 0, -65523, 65534, 0, -65522, 65534, 0, -65521, 65534, 0, -65520, 65534, 0, -65519, 65534, 0, -65518, 65534, 0, -65517, 65534, 0, -20, 65534, 0, -19, 65534, 0, -18, 65534, 0, -17, 65534, 0, -16, 65534, 0, -15, 65534, 0, -14, 65534, 0, -13, 65534, 0, -12, 65534, 0, -11, 65534, 0, -10, 65534, 0, -9, 65534, 0, -8, 65534, 0, -7, 65534, 0, -6, 65534, 0, -5, 65534, 0, -4, 65534, 0, -3, 65534, 0, -2, 65534, 0, -1, 65534, 0, 65531, 65535, 655373, 65532, 65535, 13, 65533, 65535, 1048589, 65534, 65535, 1441805, -65536, 65535, 0, -65535, 65535, 0, -65534, 65535, 1048590, -65533, 65535, 0, -65532, 65535, 0, -65531, 65535, 0, -65530, 65535, 0, -65529, 65535, 1048590, -65528, 65535, 0, -65527, 65535, 0, -65526, 65535, 0, -65525, 65535, 0, -65524, 65535, 0, -65523, 65535, 0, -65522, 65535, 0, -65521, 65535, 0, -65520, 65535, 0, -65519, 65535, 0, -65518, 65535, 0, -65517, 65535, 0, -20, 65535, 0, -19, 65535, 0, -18, 65535, 0, -17, 65535, 0, -16, 65535, 0, -15, 65535, 0, -14, 65535, 0, -13, 65535, 0, -12, 65535, 0, -11, 65535, 0, -10, 65535, 0, -9, 65535, 0, -8, 65535, 0, -7, 65535, 1441806, -6, 65535, 0, -5, 65535, 0, -4, 65535, 0, -3, 65535, 0, -2, 65535, 1441793, -1, 65535, 0 )
+}
+
+[node name="SpriteContainer" parent="ViewportContainer/Viewport/Background/BattleSlotPlayer1" index="1"]
+script = ExtResource( 9 )
+emission = null
+wave_amplitude = null
+wave_t_frequency = null
+wave_v_frequency = null
+static_amount = null
+static_offset = null
+static_speed = null
+sparkle = null
+sprite_rotation = null
+
+[node name="Sprite3D" parent="ViewportContainer/Viewport/Background/BattleSlotPlayer1/SpriteContainer/Sprite" index="0"]
+material_override = SubResource( 4 )
+
+[node name="AnimationPlayer" parent="ViewportContainer/Viewport/Background/BattleSlotPlayer1/SpriteContainer/Sprite" index="1"]
+script = ExtResource( 7 )
+
+[node name="BattleGrassParticles" parent="ViewportContainer/Viewport/Background/Props" index="61"]
+process_material = SubResource( 5 )
+
+[node name="BattleGrassParticles9" parent="ViewportContainer/Viewport/Background/Props" index="62"]
+process_material = SubResource( 6 )
+
+[node name="BattleGrassParticles6" parent="ViewportContainer/Viewport/Background/Props" index="63"]
+process_material = SubResource( 7 )
+
+[node name="BattleGrassParticles8" parent="ViewportContainer/Viewport/Background/Props" index="64"]
+process_material = SubResource( 8 )
+
+[node name="BattleGrassParticles2" parent="ViewportContainer/Viewport/Background/Props" index="65"]
+process_material = SubResource( 9 )
+
+[node name="BattleGrassParticles7" parent="ViewportContainer/Viewport/Background/Props" index="66"]
+process_material = SubResource( 10 )
+
+[node name="BattleGrassParticles3" parent="ViewportContainer/Viewport/Background/Props" index="67"]
+process_material = SubResource( 11 )
+
+[node name="BattleGrassParticles4" parent="ViewportContainer/Viewport/Background/Props" index="68"]
+process_material = SubResource( 12 )
+
+[node name="BattleGrassParticles5" parent="ViewportContainer/Viewport/Background/Props" index="69"]
+process_material = SubResource( 13 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Buttons" type="GridContainer" parent="VBoxContainer"]
+margin_right = 394.0
+margin_bottom = 444.0
+columns = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Buttons"]
+margin_right = 212.0
+margin_bottom = 60.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "Monster:"
+
+[node name="MonsterButton" type="OptionButton" parent="VBoxContainer/Buttons"]
+margin_left = 216.0
+margin_right = 390.0
+margin_bottom = 60.0
+
+[node name="PopupMenu2" type="PopupMenu" parent="VBoxContainer/Buttons/MonsterButton"]
+margin_right = 16.0
+margin_bottom = 16.0
+input_pass_on_modal_close_click = false
+allow_search = true
+
+[node name="PopupMenu3" type="PopupMenu" parent="VBoxContainer/Buttons/MonsterButton"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_clip_content = true
+input_pass_on_modal_close_click = false
+allow_search = true
+
+[node name="Label2" type="Label" parent="VBoxContainer/Buttons"]
+margin_top = 64.0
+margin_right = 212.0
+margin_bottom = 124.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "Fuse with:"
+
+[node name="FusionButton" type="OptionButton" parent="VBoxContainer/Buttons"]
+margin_left = 216.0
+margin_top = 64.0
+margin_right = 390.0
+margin_bottom = 124.0
+text = "(No Fusion)"
+items = [ "(No Fusion)", null, false, 0, null ]
+selected = 0
+
+[node name="PopupMenu2" type="PopupMenu" parent="VBoxContainer/Buttons/FusionButton"]
+input_pass_on_modal_close_click = false
+items = [ "(No Fusion)", null, 2, true, false, 0, 0, null, "", false ]
+allow_search = true
+
+[node name="PopupMenu3" type="PopupMenu" parent="VBoxContainer/Buttons/FusionButton"]
+input_pass_on_modal_close_click = false
+items = [ "(No Fusion)", null, 2, true, false, 0, 0, null, "", false ]
+allow_search = true
+
+[node name="Label3" type="Label" parent="VBoxContainer/Buttons"]
+margin_top = 128.0
+margin_right = 212.0
+margin_bottom = 188.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "Elemental Type:"
+
+[node name="CoatingButton" type="OptionButton" parent="VBoxContainer/Buttons"]
+margin_left = 216.0
+margin_top = 128.0
+margin_right = 390.0
+margin_bottom = 188.0
+text = "None"
+items = [ "None", null, false, 99, null ]
+selected = 0
+
+[node name="PopupMenu2" type="PopupMenu" parent="VBoxContainer/Buttons/CoatingButton"]
+input_pass_on_modal_close_click = false
+items = [ "None", null, 2, true, false, 99, 0, null, "", false ]
+allow_search = true
+
+[node name="PopupMenu3" type="PopupMenu" parent="VBoxContainer/Buttons/CoatingButton"]
+input_pass_on_modal_close_click = false
+items = [ "None", null, 2, true, false, 99, 0, null, "", false ]
+allow_search = true
+
+[node name="Label4" type="Label" parent="VBoxContainer/Buttons"]
+margin_top = 192.0
+margin_right = 212.0
+margin_bottom = 252.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "Animation:"
+
+[node name="AnimationButton" type="OptionButton" parent="VBoxContainer/Buttons"]
+margin_left = 216.0
+margin_top = 192.0
+margin_right = 390.0
+margin_bottom = 252.0
+text = "idle"
+items = [ "idle", null, false, 0, null, "alt_idle", null, false, 1, null, "windup", null, false, 2, null, "attack", null, false, 3, null, "hurt", null, false, 4, null ]
+selected = 0
+
+[node name="PopupMenu2" type="PopupMenu" parent="VBoxContainer/Buttons/AnimationButton"]
+input_pass_on_modal_close_click = false
+items = [ "idle", null, 2, true, false, 0, 0, null, "", false, "alt_idle", null, 2, false, false, 1, 0, null, "", false, "windup", null, 2, false, false, 2, 0, null, "", false, "attack", null, 2, false, false, 3, 0, null, "", false, "hurt", null, 2, false, false, 4, 0, null, "", false ]
+allow_search = true
+
+[node name="PopupMenu3" type="PopupMenu" parent="VBoxContainer/Buttons/AnimationButton"]
+input_pass_on_modal_close_click = false
+items = [ "idle", null, 2, true, false, 0, 0, null, "", false, "alt_idle", null, 2, false, false, 1, 0, null, "", false, "windup", null, 2, false, false, 2, 0, null, "", false, "attack", null, 2, false, false, 3, 0, null, "", false, "hurt", null, 2, false, false, 4, 0, null, "", false ]
+allow_search = true
+
+[node name="Label6" type="Label" parent="VBoxContainer/Buttons"]
+margin_top = 256.0
+margin_right = 212.0
+margin_bottom = 316.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "Background"
+
+[node name="BackgroundButton" type="OptionButton" parent="VBoxContainer/Buttons"]
+margin_left = 216.0
+margin_top = 256.0
+margin_right = 390.0
+margin_bottom = 316.0
+
+[node name="PopupMenu2" type="PopupMenu" parent="VBoxContainer/Buttons/BackgroundButton"]
+input_pass_on_modal_close_click = false
+allow_search = true
+
+[node name="PopupMenu3" type="PopupMenu" parent="VBoxContainer/Buttons/BackgroundButton"]
+input_pass_on_modal_close_click = false
+allow_search = true
+
+[node name="GlitterRegionLabel" type="Label" parent="VBoxContainer/Buttons"]
+margin_top = 320.0
+margin_right = 212.0
+margin_bottom = 380.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "Glitter Region"
+
+[node name="GlitterRegionOption" type="OptionButton" parent="VBoxContainer/Buttons"]
+margin_left = 216.0
+margin_top = 320.0
+margin_right = 390.0
+margin_bottom = 380.0
+
+[node name="AstralRegionLabel" type="Label" parent="VBoxContainer/Buttons"]
+margin_top = 384.0
+margin_right = 212.0
+margin_bottom = 444.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "Glitter Region"
+
+[node name="AstralRegionOption" type="OptionButton" parent="VBoxContainer/Buttons"]
+margin_left = 216.0
+margin_top = 384.0
+margin_right = 390.0
+margin_bottom = 444.0
+
+[node name="FusionName" type="Label" parent="VBoxContainer"]
+margin_top = 448.0
+margin_right = 394.0
+margin_bottom = 508.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "(Fusion Name)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GeneratePalette" type="Button" parent="VBoxContainer"]
+margin_top = 512.0
+margin_right = 394.0
+margin_bottom = 570.0
+text = "Generate Extended Palette"
+
+[node name="LinkEvo" type="Button" parent="VBoxContainer"]
+margin_top = 574.0
+margin_right = 394.0
+margin_bottom = 632.0
+text = "Set as Custom Remaster"
+
+[node name="SaveButton" type="Button" parent="VBoxContainer"]
+margin_top = 636.0
+margin_right = 394.0
+margin_bottom = 694.0
+text = "Save Palettes"
+
+[node name="ResetPalette" type="Button" parent="VBoxContainer"]
+margin_top = 698.0
+margin_right = 394.0
+margin_bottom = 756.0
+text = "Reset Palette"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+margin_left = 1601.0
+margin_top = -3.0
+margin_right = 1937.0
+margin_bottom = 1824.0
+
+[node name="Label7" type="Label" parent="VBoxContainer2"]
+margin_right = 336.0
+margin_bottom = 60.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "Palette"
+align = 1
+valign = 1
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer2"]
+margin_top = 64.0
+margin_right = 336.0
+margin_bottom = 950.0
+columns = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/GridContainer"]
+margin_right = 44.0
+margin_bottom = 886.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_constants/separation = -1
+
+[node name="ColorLabel1" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer"]
+margin_right = 44.0
+margin_bottom = 60.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "1:"
+align = 1
+valign = 1
+
+[node name="ColorLabel2" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer"]
+margin_top = 59.0
+margin_right = 44.0
+margin_bottom = 119.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "2:"
+align = 1
+valign = 1
+
+[node name="ColorLabel3" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer"]
+margin_top = 118.0
+margin_right = 44.0
+margin_bottom = 178.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "3:"
+align = 1
+valign = 1
+
+[node name="ColorLabel4" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer"]
+margin_top = 177.0
+margin_right = 44.0
+margin_bottom = 237.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "4:"
+align = 1
+valign = 1
+
+[node name="ColorLabel5" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer"]
+margin_top = 236.0
+margin_right = 44.0
+margin_bottom = 296.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "5:"
+align = 1
+valign = 1
+
+[node name="ColorLabel6" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer"]
+margin_top = 295.0
+margin_right = 44.0
+margin_bottom = 355.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "6:"
+align = 1
+valign = 1
+
+[node name="ColorLabel7" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer"]
+margin_top = 354.0
+margin_right = 44.0
+margin_bottom = 414.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "7:"
+align = 1
+valign = 1
+
+[node name="ColorLabel8" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer"]
+margin_top = 413.0
+margin_right = 44.0
+margin_bottom = 473.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "8:"
+align = 1
+valign = 1
+
+[node name="ColorLabel9" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer"]
+margin_top = 472.0
+margin_right = 44.0
+margin_bottom = 532.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "9:"
+align = 1
+valign = 1
+
+[node name="ColorLabel10" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer"]
+margin_top = 531.0
+margin_right = 44.0
+margin_bottom = 591.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "10:"
+align = 1
+valign = 1
+
+[node name="ColorLabel11" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer"]
+margin_top = 590.0
+margin_right = 44.0
+margin_bottom = 650.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "11:"
+align = 1
+valign = 1
+
+[node name="ColorLabel12" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer"]
+margin_top = 649.0
+margin_right = 44.0
+margin_bottom = 709.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "12:"
+align = 1
+valign = 1
+
+[node name="ColorLabel13" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer"]
+margin_top = 708.0
+margin_right = 44.0
+margin_bottom = 768.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "13:"
+align = 1
+valign = 1
+
+[node name="ColorLabel14" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer"]
+margin_top = 767.0
+margin_right = 44.0
+margin_bottom = 827.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "14:"
+align = 1
+valign = 1
+
+[node name="ColorLabel15" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer"]
+margin_top = 826.0
+margin_right = 44.0
+margin_bottom = 886.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "15:"
+align = 1
+valign = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer2/GridContainer"]
+margin_left = 48.0
+margin_right = 148.0
+margin_bottom = 878.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.0
+custom_constants/separation = 7
+
+[node name="Color1" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer2"]
+margin_right = 100.0
+margin_bottom = 52.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color2" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer2"]
+margin_top = 59.0
+margin_right = 100.0
+margin_bottom = 111.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color3" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer2"]
+margin_top = 118.0
+margin_right = 100.0
+margin_bottom = 170.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color4" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer2"]
+margin_top = 177.0
+margin_right = 100.0
+margin_bottom = 229.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color5" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer2"]
+margin_top = 236.0
+margin_right = 100.0
+margin_bottom = 288.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color6" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer2"]
+margin_top = 295.0
+margin_right = 100.0
+margin_bottom = 347.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color7" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer2"]
+margin_top = 354.0
+margin_right = 100.0
+margin_bottom = 406.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color8" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer2"]
+margin_top = 413.0
+margin_right = 100.0
+margin_bottom = 465.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color9" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer2"]
+margin_top = 472.0
+margin_right = 100.0
+margin_bottom = 524.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color10" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer2"]
+margin_top = 531.0
+margin_right = 100.0
+margin_bottom = 583.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color11" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer2"]
+margin_top = 590.0
+margin_right = 100.0
+margin_bottom = 642.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color12" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer2"]
+margin_top = 649.0
+margin_right = 100.0
+margin_bottom = 701.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color13" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer2"]
+margin_top = 708.0
+margin_right = 100.0
+margin_bottom = 760.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color14" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer2"]
+margin_top = 767.0
+margin_right = 100.0
+margin_bottom = 819.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color15" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer2"]
+margin_top = 826.0
+margin_right = 100.0
+margin_bottom = 878.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer2/GridContainer"]
+margin_left = 152.0
+margin_right = 204.0
+margin_bottom = 886.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_constants/separation = -1
+
+[node name="ColorLabel16" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer3"]
+margin_right = 52.0
+margin_bottom = 60.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "16:"
+align = 1
+valign = 1
+
+[node name="ColorLabel17" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer3"]
+margin_top = 59.0
+margin_right = 52.0
+margin_bottom = 119.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "17:"
+align = 1
+valign = 1
+
+[node name="ColorLabel18" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer3"]
+margin_top = 118.0
+margin_right = 52.0
+margin_bottom = 178.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "18:"
+align = 1
+valign = 1
+
+[node name="ColorLabel19" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer3"]
+margin_top = 177.0
+margin_right = 52.0
+margin_bottom = 237.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "19:"
+align = 1
+valign = 1
+
+[node name="ColorLabel20" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer3"]
+margin_top = 236.0
+margin_right = 52.0
+margin_bottom = 296.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "20:"
+align = 1
+valign = 1
+
+[node name="ColorLabel21" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer3"]
+margin_top = 295.0
+margin_right = 52.0
+margin_bottom = 355.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "21:"
+align = 1
+valign = 1
+
+[node name="ColorLabel22" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer3"]
+margin_top = 354.0
+margin_right = 52.0
+margin_bottom = 414.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "22:"
+align = 1
+valign = 1
+
+[node name="ColorLabel23" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer3"]
+margin_top = 413.0
+margin_right = 52.0
+margin_bottom = 473.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "23:"
+align = 1
+valign = 1
+
+[node name="ColorLabel24" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer3"]
+margin_top = 472.0
+margin_right = 52.0
+margin_bottom = 532.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "24:"
+align = 1
+valign = 1
+
+[node name="ColorLabel25" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer3"]
+margin_top = 531.0
+margin_right = 52.0
+margin_bottom = 591.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "25:"
+align = 1
+valign = 1
+
+[node name="ColorLabel26" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer3"]
+margin_top = 590.0
+margin_right = 52.0
+margin_bottom = 650.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "26:"
+align = 1
+valign = 1
+
+[node name="ColorLabel27" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer3"]
+margin_top = 649.0
+margin_right = 52.0
+margin_bottom = 709.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "27:"
+align = 1
+valign = 1
+
+[node name="ColorLabel28" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer3"]
+margin_top = 708.0
+margin_right = 52.0
+margin_bottom = 768.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "28:"
+align = 1
+valign = 1
+
+[node name="ColorLabel29" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer3"]
+margin_top = 767.0
+margin_right = 52.0
+margin_bottom = 827.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "29:"
+align = 1
+valign = 1
+
+[node name="ColorLabel30" type="Label" parent="VBoxContainer2/GridContainer/VBoxContainer3"]
+margin_top = 826.0
+margin_right = 52.0
+margin_bottom = 886.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "30:"
+align = 1
+valign = 1
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="VBoxContainer2/GridContainer"]
+margin_left = 208.0
+margin_right = 308.0
+margin_bottom = 878.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.0
+custom_constants/separation = 7
+
+[node name="Color16" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer4"]
+margin_right = 100.0
+margin_bottom = 52.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color17" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer4"]
+margin_top = 59.0
+margin_right = 100.0
+margin_bottom = 111.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color18" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer4"]
+margin_top = 118.0
+margin_right = 100.0
+margin_bottom = 170.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color19" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer4"]
+margin_top = 177.0
+margin_right = 100.0
+margin_bottom = 229.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color20" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer4"]
+margin_top = 236.0
+margin_right = 100.0
+margin_bottom = 288.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color21" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer4"]
+margin_top = 295.0
+margin_right = 100.0
+margin_bottom = 347.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color22" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer4"]
+margin_top = 354.0
+margin_right = 100.0
+margin_bottom = 406.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color23" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer4"]
+margin_top = 413.0
+margin_right = 100.0
+margin_bottom = 465.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color24" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer4"]
+margin_top = 472.0
+margin_right = 100.0
+margin_bottom = 524.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color25" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer4"]
+margin_top = 531.0
+margin_right = 100.0
+margin_bottom = 583.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color26" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer4"]
+margin_top = 590.0
+margin_right = 100.0
+margin_bottom = 642.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color27" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer4"]
+margin_top = 649.0
+margin_right = 100.0
+margin_bottom = 701.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color28" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer4"]
+margin_top = 708.0
+margin_right = 100.0
+margin_bottom = 760.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color29" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer4"]
+margin_top = 767.0
+margin_right = 100.0
+margin_bottom = 819.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="Color30" type="ColorPickerButton" parent="VBoxContainer2/GridContainer/VBoxContainer4"]
+margin_top = 826.0
+margin_right = 100.0
+margin_bottom = 878.0
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="ColorRefSheet" type="VBoxContainer" parent="."]
+margin_left = 42.0
+margin_top = 673.0
+margin_right = 342.0
+margin_bottom = 1068.0
+rect_pivot_offset = Vector2( 300, 245 )
+custom_constants/separation = 15
+
+[node name="Label" type="Label" parent="ColorRefSheet"]
+margin_right = 300.0
+margin_bottom = 60.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "Type Color Reference"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="RefColor1" type="ColorPickerButton" parent="ColorRefSheet"]
+margin_top = 75.0
+margin_right = 300.0
+margin_bottom = 127.0
+rect_pivot_offset = Vector2( 300, 0 )
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="RefColor2" type="ColorPickerButton" parent="ColorRefSheet"]
+margin_top = 142.0
+margin_right = 300.0
+margin_bottom = 194.0
+rect_pivot_offset = Vector2( 300, 0 )
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="RefColor3" type="ColorPickerButton" parent="ColorRefSheet"]
+margin_top = 209.0
+margin_right = 300.0
+margin_bottom = 261.0
+rect_pivot_offset = Vector2( 300, 0 )
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="RefColor4" type="ColorPickerButton" parent="ColorRefSheet"]
+margin_top = 276.0
+margin_right = 300.0
+margin_bottom = 328.0
+rect_pivot_offset = Vector2( 300, 0 )
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="RefColor5" type="ColorPickerButton" parent="ColorRefSheet"]
+margin_top = 343.0
+margin_right = 300.0
+margin_bottom = 395.0
+rect_pivot_offset = Vector2( 300, 0 )
+theme = ExtResource( 4 )
+custom_styles/normal = SubResource( 2 )
+edit_alpha = false
+
+[node name="ColorPickerPos" type="Control" parent="."]
+margin_left = 400.0
+margin_top = 300.0
+margin_right = 1100.0
+margin_bottom = 1000.0
+
+[node name="ColorPickerPos2" type="Control" parent="."]
+margin_left = 1100.0
+margin_top = 50.0
+margin_right = 1100.0
+margin_bottom = 90.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
+mix_target = 1
+
+[connection signal="item_selected" from="VBoxContainer/Buttons/MonsterButton" to="." method="_on_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/Buttons/FusionButton" to="." method="_on_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/Buttons/CoatingButton" to="." method="_on_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/Buttons/AnimationButton" to="." method="_on_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/Buttons/BackgroundButton" to="." method="_on_BackgroundButton_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/Buttons/GlitterRegionOption" to="." method="_on_GlitterRegionOption_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/Buttons/AstralRegionOption" to="." method="_on_AstralRegionOption_item_selected"]
+[connection signal="pressed" from="VBoxContainer/GeneratePalette" to="." method="_on_GeneratePalette_pressed"]
+[connection signal="pressed" from="VBoxContainer/LinkEvo" to="." method="_on_LinkEvo_pressed"]
+[connection signal="pressed" from="VBoxContainer/SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/ResetPalette" to="." method="_on_ResetPalette_pressed"]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color1" to="." method="_on_Color_changed" binds= [ 0 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color1" to="." method="_on_Color_pressed" binds= [ 1 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color2" to="." method="_on_Color_changed" binds= [ 1 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color2" to="." method="_on_Color_pressed" binds= [ 2 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color3" to="." method="_on_Color_changed" binds= [ 2 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color3" to="." method="_on_Color_pressed" binds= [ 3 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color4" to="." method="_on_Color_changed" binds= [ 3 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color4" to="." method="_on_Color_pressed" binds= [ 4 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color5" to="." method="_on_Color_changed" binds= [ 4 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color5" to="." method="_on_Color_pressed" binds= [ 5 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color6" to="." method="_on_Color_changed" binds= [ 5 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color6" to="." method="_on_Color_pressed" binds= [ 6 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color7" to="." method="_on_Color_changed" binds= [ 6 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color7" to="." method="_on_Color_pressed" binds= [ 7 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color8" to="." method="_on_Color_changed" binds= [ 7 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color8" to="." method="_on_Color_pressed" binds= [ 8 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color9" to="." method="_on_Color_changed" binds= [ 8 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color9" to="." method="_on_Color_pressed" binds= [ 9 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color10" to="." method="_on_Color_changed" binds= [ 9 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color10" to="." method="_on_Color_pressed" binds= [ 10 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color11" to="." method="_on_Color_changed" binds= [ 10 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color11" to="." method="_on_Color_pressed" binds= [ 11 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color12" to="." method="_on_Color_changed" binds= [ 11 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color12" to="." method="_on_Color_pressed" binds= [ 12 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color13" to="." method="_on_Color_changed" binds= [ 12 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color13" to="." method="_on_Color_pressed" binds= [ 13 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color14" to="." method="_on_Color_changed" binds= [ 13 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color14" to="." method="_on_Color_pressed" binds= [ 14 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color15" to="." method="_on_Color_changed" binds= [ 14 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer2/Color15" to="." method="_on_Color_pressed" binds= [ 15 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color16" to="." method="_on_Color_changed" binds= [ 15 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color16" to="." method="_on_Color_pressed" binds= [ 16 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color17" to="." method="_on_Color_changed" binds= [ 16 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color17" to="." method="_on_Color_pressed" binds= [ 17 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color18" to="." method="_on_Color_changed" binds= [ 17 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color18" to="." method="_on_Color_pressed" binds= [ 18 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color19" to="." method="_on_Color_changed" binds= [ 18 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color19" to="." method="_on_Color_pressed" binds= [ 19 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color20" to="." method="_on_Color_changed" binds= [ 19 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color20" to="." method="_on_Color_pressed" binds= [ 20 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color21" to="." method="_on_Color_changed" binds= [ 20 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color21" to="." method="_on_Color_pressed" binds= [ 21 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color22" to="." method="_on_Color_changed" binds= [ 21 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color22" to="." method="_on_Color_pressed" binds= [ 22 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color23" to="." method="_on_Color_changed" binds= [ 22 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color23" to="." method="_on_Color_pressed" binds= [ 23 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color24" to="." method="_on_Color_changed" binds= [ 23 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color24" to="." method="_on_Color_pressed" binds= [ 24 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color25" to="." method="_on_Color_changed" binds= [ 24 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color25" to="." method="_on_Color_pressed" binds= [ 25 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color26" to="." method="_on_Color_changed" binds= [ 25 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color26" to="." method="_on_Color_pressed" binds= [ 26 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color27" to="." method="_on_Color_changed" binds= [ 26 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color27" to="." method="_on_Color_pressed" binds= [ 27 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color28" to="." method="_on_Color_changed" binds= [ 27 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color28" to="." method="_on_Color_pressed" binds= [ 28 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color29" to="." method="_on_Color_changed" binds= [ 28 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color29" to="." method="_on_Color_pressed" binds= [ 29 ]]
+[connection signal="color_changed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color30" to="." method="_on_Color_changed" binds= [ 29 ]]
+[connection signal="pressed" from="VBoxContainer2/GridContainer/VBoxContainer4/Color30" to="." method="_on_Color_pressed" binds= [ 30 ]]
+[connection signal="pressed" from="ColorRefSheet/RefColor1" to="." method="_on_RefColor_pressed" binds= [ 1 ]]
+[connection signal="pressed" from="ColorRefSheet/RefColor2" to="." method="_on_RefColor_pressed" binds= [ 2 ]]
+[connection signal="pressed" from="ColorRefSheet/RefColor3" to="." method="_on_RefColor_pressed" binds= [ 3 ]]
+[connection signal="pressed" from="ColorRefSheet/RefColor4" to="." method="_on_RefColor_pressed" binds= [ 4 ]]
+[connection signal="pressed" from="ColorRefSheet/RefColor5" to="." method="_on_RefColor_pressed" binds= [ 5 ]]
+
+[editable path="ViewportContainer/Viewport/Background"]
+[editable path="ViewportContainer/Viewport/Background/BattleSlotPlayer1"]
+[editable path="ViewportContainer/Viewport/Background/BattleSlotPlayer1/SpriteContainer/Sprite"]
