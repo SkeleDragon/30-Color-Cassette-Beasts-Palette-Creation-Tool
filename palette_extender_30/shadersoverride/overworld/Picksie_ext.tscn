@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://world/npc/NPC.tscn" type="PackedScene" id=1]
+[ext_resource path="res://mods/zSkele_Bootlegs/picksie_ext.tres" type="Resource" id=2]
+[ext_resource path="res://sprites/monsters/world/picksie.json" type="PackedScene" id=3]
+[ext_resource path="res://world/core/PlayerDetector.tscn" type="PackedScene" id=6]
+[ext_resource path="res://world/behaviors/monsters/PicksieBehavior.tscn" type="PackedScene" id=7]
+[ext_resource path="res://sfx/world/footsteps/land_2.wav" type="AudioStream" id=9]
+[ext_resource path="res://mods/zSkele_Bootlegs/shadersoverride/SpriteContainer_ext.gd" type="Script" id=10]
+[ext_resource path="res://mods/zSkele_Bootlegs/shadersoverride/overworld/MonsterPalette_ext.gd" type="Script" id=11]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 1.1
+height = 1.1
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.8, 2, 7 )
+
+[node name="Picksie" instance=ExtResource( 1 )]
+collision_layer = 16528
+respawn_at_kill_depth = false
+can_swim = false
+
+[node name="Sprite" parent="." index="2"]
+script = ExtResource( 10 )
+idle = "idle"
+emission = Color( 0, 0, 0, 1 )
+wave_amplitude = 0.0
+wave_t_frequency = 5.0
+wave_v_frequency = 0.0
+static_amount = 0.0
+static_offset = 0.0
+static_speed = 0.0
+sparkle = false
+sprite_rotation = Vector3( 0, 0, 0 )
+
+[node name="Sprite" parent="Sprite" index="0" instance=ExtResource( 3 )]
+
+[node name="Interaction" parent="." index="4"]
+display_marker = false
+
+[node name="Footsteps" parent="." index="5"]
+land_audio = ExtResource( 9 )
+
+[node name="Controls" parent="." index="6"]
+enable_acceleration = true
+infinite_deceleration = false
+default_enable_acceleration = true
+default_infinite_deceleration = false
+
+[node name="PlayerTouchDetector" parent="." index="8" instance=ExtResource( 6 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerTouchDetector" index="0"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.325, 0 )
+shape = SubResource( 1 )
+
+[node name="PlayerSightDetector" parent="." index="9" instance=ExtResource( 6 )]
+sneak_immunity = false
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerSightDetector" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 10 )
+shape = SubResource( 2 )
+
+[node name="MonsterBehavior" parent="." index="10" instance=ExtResource( 7 )]
+
+[node name="MonsterPalette" type="Node" parent="." index="11"]
+script = ExtResource( 11 )
+species = ExtResource( 2 )
+
+[connection signal="detected" from="PlayerTouchDetector" to="Interaction" method="interact"]
+[connection signal="detected" from="PlayerSightDetector" to="MonsterBehavior" method="start_pursuit"]

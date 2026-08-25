@@ -1,0 +1,94 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://world/monsters/Jumpkin.gd" type="Script" id=1]
+[ext_resource path="res://nodes/actions/Cutscene.gd" type="Script" id=2]
+[ext_resource path="res://nodes/actions/MessageDialogAction.gd" type="Script" id=3]
+[ext_resource path="res://nodes/actions/HasItemAction.gd" type="Script" id=4]
+[ext_resource path="res://data/items/jelly.tres" type="Resource" id=5]
+[ext_resource path="res://addons/misc_utils/actions/decorators/Succeeder.gd" type="Script" id=6]
+[ext_resource path="res://addons/misc_utils/actions/composites/Selector.gd" type="Script" id=7]
+[ext_resource path="res://nodes/actions/ConfirmDialogAction.gd" type="Script" id=8]
+[ext_resource path="res://nodes/actions/BattleAction.gd" type="Script" id=9]
+[ext_resource path="res://sprites/monsters/world/jumpkin.json" type="PackedScene" id=10]
+[ext_resource path="res://nodes/actions/ConsumeItemAction.gd" type="Script" id=11]
+[ext_resource path="res://addons/misc_utils/actions/composites/Sequence.gd" type="Script" id=12]
+[ext_resource path="res://addons/misc_utils/actions/values/GetNode.gd" type="Script" id=13]
+[ext_resource path="res://nodes/actions/PlayAnimationAction.gd" type="Script" id=14]
+[ext_resource path="res://addons/misc_utils/actions/WaitAction.gd" type="Script" id=15]
+[ext_resource path="res://nodes/actions/HasFlagAction.gd" type="Script" id=16]
+[ext_resource path="res://mods/zSkele_Bootlegs/shadersoverride/overworld/MonsterPalette_ext.gd" type="Script" id=17]
+[ext_resource path="res://mods/zSkele_Bootlegs/jumpkin_ext.tres" type="Resource" id=18]
+[ext_resource path="res://mods/zSkele_Bootlegs/shadersoverride/SpriteContainer_ext.gd" type="Script" id=19]
+
+[sub_resource type="CylinderShape" id=1]
+radius = 0.75
+height = 1.0
+
+[node name="Jumpkin" type="KinematicBody"]
+collision_mask = 32769
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Spatial" parent="."]
+script = ExtResource( 19 )
+direction = "down"
+billboard_depth_hack = true
+wave_t_frequency = 5.0
+
+[node name="Sprite" parent="Sprite" instance=ExtResource( 10 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+shape = SubResource( 1 )
+
+[node name="Cutscene" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Selector" type="Node" parent="Cutscene"]
+script = ExtResource( 7 )
+
+[node name="Sequence" type="Node" parent="Cutscene/Selector"]
+script = ExtResource( 12 )
+
+[node name="HasFlagAction" type="Node" parent="Cutscene/Selector/Sequence"]
+script = ExtResource( 16 )
+flag = "encounter_farm_bridge"
+
+[node name="HasItemAction" type="Node" parent="Cutscene/Selector/Sequence"]
+script = ExtResource( 4 )
+item = ExtResource( 5 )
+
+[node name="Succeeder" type="Node" parent="Cutscene/Selector/Sequence"]
+script = ExtResource( 6 )
+
+[node name="ConfirmDialogAction" type="Node" parent="Cutscene/Selector/Sequence/Succeeder"]
+script = ExtResource( 8 )
+message = "FARM_PUMPKIN_SPREAD_JELLY_QUESTION"
+
+[node name="ConsumeItemAction" type="Node" parent="Cutscene/Selector/Sequence/Succeeder"]
+script = ExtResource( 11 )
+item = ExtResource( 5 )
+
+[node name="PlayAnimationAction" type="Node" parent="Cutscene/Selector/Sequence/Succeeder"]
+script = ExtResource( 14 )
+animation_name = "transform"
+wait_for_animation = false
+
+[node name="GetNode" type="Node" parent="Cutscene/Selector/Sequence/Succeeder/PlayAnimationAction"]
+script = ExtResource( 13 )
+path = NodePath("../../../../../../Sprite/Sprite")
+
+[node name="WaitAction" type="Node" parent="Cutscene/Selector/Sequence/Succeeder"]
+script = ExtResource( 15 )
+
+[node name="BattleAction" type="Node" parent="Cutscene/Selector/Sequence/Succeeder"]
+script = ExtResource( 9 )
+result_on_player_win = 1
+remove_pawn_on_success = true
+
+[node name="MessageDialogAction" type="Node" parent="Cutscene/Selector"]
+script = ExtResource( 3 )
+messages = [ "FARM_PUMPKIN_NO_JELLY" ]
+
+[node name="MonsterPalette" type="Node" parent="."]
+script = ExtResource( 17 )
+species = ExtResource( 18 )

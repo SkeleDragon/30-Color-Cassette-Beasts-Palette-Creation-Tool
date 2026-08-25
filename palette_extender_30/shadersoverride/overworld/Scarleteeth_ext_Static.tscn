@@ -1,0 +1,108 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://world/npc/NPC.tscn" type="PackedScene" id=1]
+[ext_resource path="res://world/behaviors/monsters/MonsterBehavior.gd" type="Script" id=2]
+[ext_resource path="res://mods/zSkele_Bootlegs/shadersoverride/overworld/MonsterPalette_ext_Static.gd" type="Script" id=3]
+[ext_resource path="res://sprites/monsters/world/scarleteeth.json" type="PackedScene" id=4]
+[ext_resource path="res://mods/zSkele_Bootlegs/scarleteeth_ext.tres" type="Resource" id=5]
+[ext_resource path="res://world/core/PlayerDetector.tscn" type="PackedScene" id=6]
+[ext_resource path="res://nodes/actions/BattleAction.gd" type="Script" id=7]
+[ext_resource path="res://world/npc/IdleAnimationState.gd" type="Script" id=8]
+[ext_resource path="res://sfx/world/footsteps/land_2.wav" type="AudioStream" id=9]
+[ext_resource path="res://nodes/actions/Cutscene.gd" type="Script" id=10]
+[ext_resource path="res://nodes/actions/ChangeTrackerTargetAction.gd" type="Script" id=11]
+[ext_resource path="res://addons/misc_utils/actions/WaitAction.gd" type="Script" id=12]
+[ext_resource path="res://mods/zSkele_Bootlegs/shadersoverride/SpriteContainer_ext.gd" type="Script" id=13]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.9
+height = 3.0
+
+[sub_resource type="SphereShape" id=3]
+radius = 10.0
+
+[node name="Scarleteeth" instance=ExtResource( 1 )]
+collision_layer = 16528
+respawn_at_kill_depth = false
+
+[node name="CollisionShape" parent="." index="1"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.425, 0 )
+shape = SubResource( 1 )
+
+[node name="Sprite" parent="." index="2"]
+script = ExtResource( 13 )
+idle = "idle"
+render_priority = 1
+emission = Color( 0, 0, 0, 1 )
+wave_amplitude = 0.0
+wave_t_frequency = 5.0
+wave_v_frequency = 0.0
+static_amount = 0.0
+static_offset = 0.0
+static_speed = 0.0
+sparkle = false
+sprite_rotation = Vector3( 0, 0, 0 )
+
+[node name="Sprite" parent="Sprite" index="0" instance=ExtResource( 4 )]
+
+[node name="Interaction" parent="." index="4"]
+display_marker = false
+
+[node name="CollisionShape" parent="Interaction" index="0"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.425, 0 )
+shape = SubResource( 1 )
+
+[node name="Cutscene" type="Node" parent="Interaction" index="1"]
+script = ExtResource( 10 )
+wait_for_animation = false
+
+[node name="ChangeTrackerTargetAction" type="Node" parent="Interaction/Cutscene" index="0"]
+script = ExtResource( 11 )
+wait_for_arrival = false
+
+[node name="WaitAction" type="Node" parent="Interaction/Cutscene/ChangeTrackerTargetAction" index="0"]
+script = ExtResource( 12 )
+
+[node name="BattleAction" type="Node" parent="Interaction/Cutscene/ChangeTrackerTargetAction" index="1"]
+script = ExtResource( 7 )
+result_on_player_win = 1
+remove_pawn_on_success = true
+
+[node name="Footsteps" parent="." index="5"]
+land_audio = ExtResource( 9 )
+
+[node name="Controls" parent="." index="6"]
+default_enable_acceleration = true
+default_infinite_deceleration = false
+
+[node name="PlayerSightDetector" parent="." index="8" instance=ExtResource( 6 )]
+sneak_immunity = false
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerSightDetector" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+shape = SubResource( 3 )
+
+[node name="MonsterBehavior" type="Node" parent="." index="9"]
+script = ExtResource( 2 )
+default_state = "Inactive"
+pursue_state = "Active"
+pursuit_cooldown = 0.0
+one_pursuer_per_target = false
+repelable = false
+
+[node name="Inactive" type="Node" parent="MonsterBehavior" index="0"]
+
+[node name="Active" type="Node" parent="MonsterBehavior" index="1"]
+script = ExtResource( 8 )
+animation_intro = "transform"
+animation_loop = "active"
+animation_outro = "transform"
+animation_outro_backwards = true
+
+[node name="MonsterPalette" type="Node" parent="." index="10"]
+script = ExtResource( 3 )
+species = ExtResource( 5 )
+
+[connection signal="detected" from="PlayerSightDetector" to="Interaction" method="interact"]
+[connection signal="detected" from="PlayerSightDetector" to="MonsterBehavior" method="start_pursuit"]
+[connection signal="undetected" from="PlayerSightDetector" to="MonsterBehavior" method="end_pursuit"]

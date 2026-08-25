@@ -1,0 +1,127 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://world/npc/NPC.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sfx/attacks/bite.wav" type="AudioStream" id=2]
+[ext_resource path="res://nodes/actions/Cutscene.gd" type="Script" id=3]
+[ext_resource path="res://nodes/actions/BattleAction.gd" type="Script" id=4]
+[ext_resource path="res://nodes/actions/ChangeTrackerTargetAction.gd" type="Script" id=5]
+[ext_resource path="res://world/core/PlayerDetector.tscn" type="PackedScene" id=6]
+[ext_resource path="res://nodes/actions/PlayNPCAnimationAction.gd" type="Script" id=7]
+[ext_resource path="res://addons/misc_utils/StateMachine.gd" type="Script" id=8]
+[ext_resource path="res://sfx/world/footsteps/land_2.wav" type="AudioStream" id=9]
+[ext_resource path="res://mods/zSkele_Bootlegs/trapwurm_ext.tres" type="Resource" id=10]
+[ext_resource path="res://sprites/monsters/world/trapwurm.json" type="PackedScene" id=11]
+[ext_resource path="res://world/npc/IdleAnimationState.gd" type="Script" id=12]
+[ext_resource path="res://nodes/actions/PlayAnimationAction.gd" type="Script" id=13]
+[ext_resource path="res://addons/misc_utils/actions/values/GetNode.gd" type="Script" id=16]
+[ext_resource path="res://addons/misc_utils/actions/WaitAction.gd" type="Script" id=17]
+[ext_resource path="res://mods/zSkele_Bootlegs/shadersoverride/SpriteContainer_ext.gd" type="Script" id=18]
+[ext_resource path="res://mods/zSkele_Bootlegs/shadersoverride/overworld/MonsterPalette_ext_Static.gd" type="Script" id=20]
+[ext_resource path="res://nodes/actions/PlayAudioAction.gd" type="Script" id=22]
+
+[sub_resource type="CylinderShape" id=1]
+height = 0.25
+radius = 0.25
+
+[sub_resource type="CylinderShape" id=2]
+height = 3.0
+radius = 4.0
+
+[node name="Trapwurm" instance=ExtResource( 1 )]
+collision_layer = 16512
+collision_mask = 32769
+respawn_at_kill_depth = false
+can_swim = false
+
+[node name="CollisionShape" parent="." index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0 )
+shape = SubResource( 1 )
+
+[node name="Sprite" parent="." index="2"]
+script = ExtResource( 18 )
+idle = "inactive"
+emission = Color( 0, 0, 0, 1 )
+wave_amplitude = 0.0
+wave_t_frequency = 5.0
+wave_v_frequency = 0.0
+static_amount = 0.0
+static_offset = 0.0
+static_speed = 0.0
+sparkle = false
+sprite_rotation = Vector3( 0, 0, 0 )
+
+[node name="Sprite" parent="Sprite" index="0" instance=ExtResource( 11 )]
+
+[node name="Interaction" parent="." index="4"]
+display_marker = false
+
+[node name="CollisionShape" parent="Interaction" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+shape = SubResource( 2 )
+
+[node name="Cutscene" type="Node" parent="Interaction" index="1"]
+script = ExtResource( 3 )
+wait_for_animation = false
+
+[node name="PlayAudioAction" type="Node" parent="Interaction/Cutscene" index="0"]
+script = ExtResource( 22 )
+stream = ExtResource( 2 )
+random_pitch = 1.0
+wait_for_finish = false
+
+[node name="PlayNPCAnimationAction" type="Node" parent="Interaction/Cutscene" index="1"]
+script = ExtResource( 7 )
+animation = "active"
+wait_for_animation = false
+revert_on_finish = false
+
+[node name="PlayAnimationAction" type="Node" parent="Interaction/Cutscene" index="2"]
+script = ExtResource( 13 )
+animation_name = "attack"
+wait_for_animation = false
+
+[node name="GetNode" type="Node" parent="Interaction/Cutscene/PlayAnimationAction" index="0"]
+script = ExtResource( 16 )
+path = NodePath("../../../../Sprite")
+
+[node name="ChangeTrackerTargetAction" type="Node" parent="Interaction/Cutscene" index="3"]
+script = ExtResource( 5 )
+zoom = 2.0
+
+[node name="WaitAction" type="Node" parent="Interaction/Cutscene/ChangeTrackerTargetAction" index="0"]
+script = ExtResource( 17 )
+base_seconds = 0.4
+
+[node name="BattleAction" type="Node" parent="Interaction/Cutscene/ChangeTrackerTargetAction" index="1"]
+script = ExtResource( 4 )
+result_on_player_win = 1
+remove_pawn_on_success = true
+
+[node name="Footsteps" parent="." index="5"]
+footsteps_disabled = true
+land_audio = ExtResource( 9 )
+
+[node name="Controls" parent="." index="6"]
+enable_acceleration = true
+infinite_deceleration = false
+default_enable_acceleration = true
+default_infinite_deceleration = false
+
+[node name="StateMachine" type="Node" parent="." index="8"]
+script = ExtResource( 8 )
+
+[node name="Idle" type="Node" parent="StateMachine" index="0"]
+script = ExtResource( 12 )
+animation_loop = ""
+
+[node name="PlayerTouchDetector" parent="." index="9" instance=ExtResource( 6 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerTouchDetector" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+shape = SubResource( 2 )
+
+[node name="MonsterPalette" type="Node" parent="." index="10"]
+script = ExtResource( 20 )
+species = ExtResource( 10 )
+
+[connection signal="detected" from="PlayerTouchDetector" to="Interaction" method="interact"]

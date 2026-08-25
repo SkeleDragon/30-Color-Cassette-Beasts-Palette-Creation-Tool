@@ -1,0 +1,179 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://world/npc/NPC.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/monsters/world/undyin_tentacles.json" type="PackedScene" id=2]
+[ext_resource path="res://nodes/actions/Cutscene.gd" type="Script" id=3]
+[ext_resource path="res://nodes/actions/BattleAction.gd" type="Script" id=4]
+[ext_resource path="res://nodes/actions/ChangeTrackerTargetAction.gd" type="Script" id=5]
+[ext_resource path="res://world/core/PlayerDetector.tscn" type="PackedScene" id=6]
+[ext_resource path="res://world/behaviors/monsters/UndyinTentacleBehavior.tscn" type="PackedScene" id=7]
+[ext_resource path="res://addons/misc_utils/StateMachine.gd" type="Script" id=8]
+[ext_resource path="res://sfx/world/footsteps/land_2.wav" type="AudioStream" id=9]
+[ext_resource path="res://sprites/monsters/world/undyin_eyes.json" type="PackedScene" id=10]
+[ext_resource path="res://mods/zSkele_Bootlegs/shadersoverride/SpriteContainer_ext.gd" type="Script" id=11]
+[ext_resource path="res://nodes/actions/SetVisibleAction.gd" type="Script" id=12]
+[ext_resource path="res://nodes/actions/PlayAnimationAction.gd" type="Script" id=13]
+[ext_resource path="res://world/npc/WalkingState.gd" type="Script" id=14]
+[ext_resource path="res://world/npc/AirState.gd" type="Script" id=15]
+[ext_resource path="res://addons/misc_utils/actions/values/GetNode.gd" type="Script" id=16]
+[ext_resource path="res://addons/misc_utils/actions/WaitAction.gd" type="Script" id=17]
+[ext_resource path="res://sfx/silence.wav" type="AudioStream" id=18]
+[ext_resource path="res://nodes/actions/ChangeMusicAction.gd" type="Script" id=19]
+[ext_resource path="res://mods/zSkele_Bootlegs/shadersoverride/overworld/MonsterPalette_ext_Static.gd" type="Script" id=20]
+[ext_resource path="res://mods/zSkele_Bootlegs/undyin_ext.tres" type="Resource" id=21]
+[ext_resource path="res://nodes/actions/PlayAudioAction.gd" type="Script" id=22]
+[ext_resource path="res://sfx/cries/undyin_cry.wav" type="AudioStream" id=23]
+[ext_resource path="res://sfx/world/water/splash_1.wav" type="AudioStream" id=24]
+
+[sub_resource type="CylinderShape" id=1]
+height = 1.0
+
+[sub_resource type="CylinderShape" id=2]
+radius = 4.0
+height = 3.0
+
+[sub_resource type="CylinderShape" id=3]
+radius = 24.0
+
+[node name="Undyin" instance=ExtResource( 1 )]
+collision_layer = 16512
+collision_mask = 32769
+respawn_at_kill_depth = false
+can_swim = false
+
+[node name="CollisionShape" parent="." index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+shape = SubResource( 1 )
+
+[node name="Sprite" parent="." index="2"]
+offset = Vector3( 0, 0.125, 0 )
+emission = Color( 0, 0, 0, 1 )
+wave_amplitude = 0.0
+wave_t_frequency = 5.0
+wave_v_frequency = 0.0
+static_amount = 0.0
+static_offset = 0.0
+static_speed = 0.0
+sparkle = false
+sprite_rotation = Vector3( 0, 0, 0 )
+
+[node name="undyin_eyes" parent="Sprite" index="0" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0 )
+
+[node name="Tentacles" type="Spatial" parent="." index="3"]
+visible = false
+script = ExtResource( 11 )
+idle = "idle"
+wave_t_frequency = 5.0
+
+[node name="undyin_tentacles" parent="Tentacles" index="0" instance=ExtResource( 2 )]
+
+[node name="Interaction" parent="." index="5"]
+display_marker = false
+
+[node name="CollisionShape" parent="Interaction" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+shape = SubResource( 2 )
+
+[node name="Cutscene" type="Node" parent="Interaction" index="1"]
+script = ExtResource( 3 )
+wait_for_animation = false
+world_mode = 0
+
+[node name="SetVisibleAction" type="Node" parent="Interaction/Cutscene" index="0"]
+script = ExtResource( 12 )
+
+[node name="GetNode2" type="Node" parent="Interaction/Cutscene/SetVisibleAction" index="0"]
+script = ExtResource( 16 )
+path = NodePath("../../../../Tentacles")
+
+[node name="PlayAudioAction" type="Node" parent="Interaction/Cutscene" index="1"]
+script = ExtResource( 22 )
+stream = ExtResource( 24 )
+random_pitch = 1.0
+wait_for_finish = false
+
+[node name="PlayAudioAction2" type="Node" parent="Interaction/Cutscene" index="2"]
+script = ExtResource( 22 )
+stream = ExtResource( 23 )
+random_pitch = 1.0
+wait_for_finish = false
+
+[node name="PlayAnimationAction" type="Node" parent="Interaction/Cutscene" index="3"]
+script = ExtResource( 13 )
+animation_name = "appear"
+wait_for_animation = false
+
+[node name="GetNode" type="Node" parent="Interaction/Cutscene/PlayAnimationAction" index="0"]
+script = ExtResource( 16 )
+path = NodePath("../../../../Tentacles")
+
+[node name="ChangeMusicAction" type="Node" parent="Interaction/Cutscene" index="4"]
+script = ExtResource( 19 )
+music = ExtResource( 18 )
+revert_on_exit = false
+
+[node name="ChangeTrackerTargetAction" type="Node" parent="Interaction/Cutscene" index="5"]
+script = ExtResource( 5 )
+zoom = 2.0
+
+[node name="WaitAction" type="Node" parent="Interaction/Cutscene/ChangeTrackerTargetAction" index="0"]
+script = ExtResource( 17 )
+base_seconds = 0.4
+
+[node name="BattleAction" type="Node" parent="Interaction/Cutscene/ChangeTrackerTargetAction" index="1"]
+script = ExtResource( 4 )
+result_on_player_win = 1
+remove_pawn_on_success = true
+
+[node name="ChangeMusicAction2" type="Node" parent="Interaction/Cutscene/ChangeTrackerTargetAction" index="2"]
+script = ExtResource( 19 )
+revert_on_exit = false
+
+[node name="Footsteps" parent="." index="6"]
+footsteps_disabled = true
+land_audio = ExtResource( 9 )
+
+[node name="Controls" parent="." index="7"]
+enable_acceleration = true
+infinite_deceleration = false
+default_enable_acceleration = true
+default_infinite_deceleration = false
+
+[node name="StateMachine" type="Node" parent="." index="9"]
+script = ExtResource( 8 )
+
+[node name="Walking" type="Node" parent="StateMachine" index="0"]
+script = ExtResource( 14 )
+max_walk_speed = 16.0
+jump_speed = 0.0
+
+[node name="Falling" type="Node" parent="StateMachine" index="1"]
+script = ExtResource( 15 )
+glide_acceleration = 48.0
+recovery_y_velocity_threshold = 32.0
+recovery_play_land_audio = true
+
+[node name="Nothing" type="Node" parent="StateMachine" index="2"]
+
+[node name="PlayerTouchDetector" parent="." index="10" instance=ExtResource( 6 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerTouchDetector" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+shape = SubResource( 2 )
+
+[node name="PlayerSightDetector" parent="." index="11" instance=ExtResource( 6 )]
+sneak_immunity = false
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerSightDetector" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 3 )
+
+[node name="MonsterBehavior" parent="." index="12" instance=ExtResource( 7 )]
+
+[node name="MonsterPalette" type="Node" parent="." index="13"]
+script = ExtResource( 20 )
+species = ExtResource( 21 )
+
+[connection signal="detected" from="PlayerTouchDetector" to="Interaction" method="interact"]
+[connection signal="detected" from="PlayerSightDetector" to="MonsterBehavior" method="start_pursuit"]

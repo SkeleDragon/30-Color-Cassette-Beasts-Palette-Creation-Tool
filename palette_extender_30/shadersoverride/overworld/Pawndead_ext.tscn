@@ -1,0 +1,78 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://world/npc/NPC.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/monsters/world/pawndead.json" type="PackedScene" id=2]
+[ext_resource path="res://world/behaviors/monsters/PawndeadBehavior.tscn" type="PackedScene" id=3]
+[ext_resource path="res://nodes/actions/BattleAction.gd" type="Script" id=4]
+[ext_resource path="res://world/behaviors/monsters/PawndeadStateMachine.tscn" type="PackedScene" id=5]
+[ext_resource path="res://world/core/PlayerDetector.tscn" type="PackedScene" id=6]
+[ext_resource path="res://mods/zSkele_Bootlegs/shadersoverride/overworld/MonsterPalette_ext.gd" type="Script" id=7]
+[ext_resource path="res://mods/zSkele_Bootlegs/pawndead_ext.tres" type="Resource" id=8]
+[ext_resource path="res://sfx/world/footsteps/land_2.wav" type="AudioStream" id=9]
+[ext_resource path="res://mods/zSkele_Bootlegs/shadersoverride/SpriteContainer_ext.gd" type="Script" id=10]
+[ext_resource path="res://nodes/actions/AdvantageCheckAction.gd" type="Script" id=20]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 1.1
+height = 1.1
+
+[sub_resource type="CylinderShape" id=2]
+radius = 8.0
+
+[node name="Pawndead" instance=ExtResource( 1 )]
+collision_layer = 16528
+respawn_at_kill_depth = false
+can_swim = false
+
+[node name="Sprite" parent="." index="2"]
+script = ExtResource( 10 )
+albedo = Color( 1, 1, 1, 1 )
+emission = Color( 0, 0, 0, 1 )
+wave_amplitude = 0.0
+wave_t_frequency = 5.0
+wave_v_frequency = 0.0
+static_amount = 0.0
+static_offset = 0.0
+static_speed = 0.0
+sparkle = false
+
+[node name="Sprite" parent="Sprite" index="0" instance=ExtResource( 2 )]
+
+[node name="Interaction" parent="." index="4"]
+display_marker = false
+
+[node name="AdvantageCheckAction" type="Node" parent="Interaction" index="1"]
+script = ExtResource( 20 )
+
+[node name="BattleAction" type="Node" parent="Interaction/AdvantageCheckAction" index="0"]
+script = ExtResource( 4 )
+result_on_player_win = 1
+remove_pawn_on_success = true
+
+[node name="Footsteps" parent="." index="5"]
+land_audio = ExtResource( 9 )
+
+[node name="StateMachine" parent="." index="8" instance=ExtResource( 5 )]
+
+[node name="PlayerTouchDetector" parent="." index="9" instance=ExtResource( 6 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerTouchDetector" index="0"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.325, 0 )
+shape = SubResource( 1 )
+
+[node name="PlayerSightDetector" parent="." index="10" instance=ExtResource( 6 )]
+sneak_immunity = false
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerSightDetector" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 2 )
+
+[node name="MonsterBehavior" parent="." index="11" instance=ExtResource( 3 )]
+
+[node name="MonsterPalette" type="Node" parent="." index="12"]
+script = ExtResource( 7 )
+species = ExtResource( 8 )
+
+[connection signal="detected" from="PlayerTouchDetector" to="Interaction" method="interact"]
+[connection signal="detected" from="PlayerSightDetector" to="MonsterBehavior" method="start_pursuit"]
+[connection signal="undetected" from="PlayerSightDetector" to="MonsterBehavior" method="end_pursuit"]

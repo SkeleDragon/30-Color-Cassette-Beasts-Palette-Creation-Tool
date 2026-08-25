@@ -1,0 +1,149 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://world/npc/NPC.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/monsters/world/dominoth.json" type="PackedScene" id=2]
+[ext_resource path="res://nodes/actions/Cutscene.gd" type="Script" id=3]
+[ext_resource path="res://nodes/actions/BattleAction.gd" type="Script" id=4]
+[ext_resource path="res://data/characters/blank_monster.tres" type="Resource" id=5]
+[ext_resource path="res://world/core/PlayerDetector.tscn" type="PackedScene" id=6]
+[ext_resource path="res://nodes/actions/FaceDirectionAction.gd" type="Script" id=7]
+[ext_resource path="res://nodes/actions/IdleBehavior.gd" type="Script" id=8]
+[ext_resource path="res://addons/misc_utils/actions/WaitAction.gd" type="Script" id=9]
+[ext_resource path="res://cutscenes/intro/Tutorial2_Part4.tscn" type="PackedScene" id=10]
+[ext_resource path="res://nodes/encounter_config/EncounterConfig.gd" type="Script" id=11]
+[ext_resource path="res://sfx/world/footsteps/land_2.wav" type="AudioStream" id=12]
+[ext_resource path="res://nodes/encounter_config/TapeConfig.gd" type="Script" id=13]
+[ext_resource path="res://nodes/encounter_config/CharacterConfig.gd" type="Script" id=14]
+[ext_resource path="res://mods/zSkele_Bootlegs/dominoth_ext.tres" type="Resource" id=15]
+[ext_resource path="res://world/npc/HumanStateMachine.tscn" type="PackedScene" id=16]
+[ext_resource path="res://mods/zSkele_Bootlegs/shadersoverride/overworld/MonsterPalette_ext.gd" type="Script" id=17]
+[ext_resource path="res://cutscenes/intro/Tutorial2_Part3_BattleStart.tscn" type="PackedScene" id=18]
+[ext_resource path="res://cutscenes/intro/Tutorial2_Part3_BattleOnSwitchForms.tscn" type="PackedScene" id=19]
+[ext_resource path="res://nodes/actions/AdvantageCheckAction.gd" type="Script" id=20]
+[ext_resource path="res://cutscenes/intro/Tutorial2_Part3_BattleSuccessfulRecording.tscn" type="PackedScene" id=21]
+[ext_resource path="res://battle/ai/TutorialDominothAI.tscn" type="PackedScene" id=22]
+[ext_resource path="res://world/core/QuestMarker.gd" type="Script" id=23]
+[ext_resource path="res://data/quests/story/TutorialQuest2.tscn" type="PackedScene" id=24]
+[ext_resource path="res://mods/zSkele_Bootlegs/shadersoverride/SpriteContainer_ext.gd" type="Script" id=25]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 1.1
+height = 1.1
+
+[node name="TutorialDominoth" instance=ExtResource( 1 )]
+collision_layer = 16528
+respawn_at_kill_depth = false
+
+[node name="Sprite" parent="." index="2"]
+script = ExtResource( 25 )
+albedo = Color( 1, 1, 1, 1 )
+emission = Color( 0, 0, 0, 1 )
+wave_amplitude = 0.0
+wave_t_frequency = 5.0
+wave_v_frequency = 0.0
+static_amount = 0.0
+static_offset = 0.0
+static_speed = 0.0
+sparkle = false
+
+[node name="Sprite" parent="Sprite" index="0" instance=ExtResource( 2 )]
+
+[node name="Interaction" parent="." index="4"]
+display_marker = false
+
+[node name="AdvantageCheckAction" type="Node" parent="Interaction" index="1"]
+script = ExtResource( 20 )
+
+[node name="Cutscene" type="Node" parent="Interaction/AdvantageCheckAction" index="0"]
+script = ExtResource( 3 )
+wait_for_animation = false
+
+[node name="BattleAction" type="Node" parent="Interaction/AdvantageCheckAction/Cutscene" index="0"]
+script = ExtResource( 4 )
+result_on_player_win = 1
+remove_pawn_on_success = true
+
+[node name="Tutorial2_Part4" parent="Interaction/AdvantageCheckAction/Cutscene" index="1" instance=ExtResource( 10 )]
+
+[node name="Footsteps" parent="." index="5"]
+land_audio = ExtResource( 12 )
+
+[node name="StateMachine" parent="." index="8" instance=ExtResource( 16 )]
+
+[node name="PlayerTouchDetector" parent="." index="9" instance=ExtResource( 6 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerTouchDetector" index="0"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.325, 0 )
+shape = SubResource( 1 )
+
+[node name="IdleBehavior" type="Node" parent="." index="10"]
+script = ExtResource( 8 )
+
+[node name="FaceDirectionAction" type="Node" parent="IdleBehavior" index="0"]
+script = ExtResource( 7 )
+__meta__ = {
+"action_tree": true
+}
+direction = "clockwise"
+
+[node name="WaitAction" type="Node" parent="IdleBehavior" index="1"]
+script = ExtResource( 9 )
+random_seconds = 1.0
+
+[node name="EncounterConfig" type="Node" parent="." index="11"]
+script = ExtResource( 11 )
+can_flee = false
+cutscenes = [ ExtResource( 18 ), ExtResource( 21 ), ExtResource( 19 ) ]
+
+[node name="CharacterConfig" type="Node" parent="EncounterConfig" index="0"]
+script = ExtResource( 14 )
+base_character = ExtResource( 5 )
+human_colors = {
+"body_color_1": -1,
+"body_color_2": -1,
+"eye_color": -1,
+"face_accessory_color": -1,
+"favorite_color": -1,
+"hair_accessory_color": -1,
+"hair_color": -1,
+"legs_color": -1,
+"shoe_color": -1,
+"skin_color": -1
+}
+human_part_names = {
+"arms": "",
+"body": "",
+"hair": "",
+"head": "",
+"legs": ""
+}
+ai = ExtResource( 22 )
+human_part_names/body = ""
+human_part_names/hair = ""
+human_part_names/head = ""
+human_part_names/legs = ""
+human_colors/body_color_1 = -1
+human_colors/body_color_2 = -1
+human_colors/eye_color = -1
+human_colors/face_accessory_color = -1
+human_colors/favorite_color = -1
+human_colors/hair_accessory_color = -1
+human_colors/hair_color = -1
+human_colors/legs_color = -1
+human_colors/shoe_color = -1
+human_colors/skin_color = -1
+
+[node name="TapeConfig" type="Node" parent="EncounterConfig/CharacterConfig" index="0"]
+script = ExtResource( 13 )
+form = ExtResource( 15 )
+
+[node name="MonsterPalette" type="Node" parent="." index="12"]
+script = ExtResource( 17 )
+species = ExtResource( 15 )
+
+[node name="QuestMarker" type="Spatial" parent="." index="13"]
+script = ExtResource( 23 )
+quests = [ ExtResource( 24 ) ]
+display_states = 6
+
+[connection signal="detected" from="PlayerTouchDetector" to="Interaction" method="interact"]
