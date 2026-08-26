@@ -7,4 +7,6 @@ I use this tool for [my own mod on Steam Workshop.](https://steamcommunity.com/s
 
 The shadersoverride folder contains copies of what I use in my mod, but on generation it'll overwrite my paths with your mod path.
 
-The palette_extender_30 tool goes into "YourDecompiledCassetteBeastsFolder"/tools Then you just play the scene NOT the project.
+The palette_extender_30 tool goes into "YourDecompiledCassetteBeastsFolder"/tools folder.
+
+Then you just play the scene NOT the project.
