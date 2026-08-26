@@ -3,3 +3,4 @@ The main differences here are mainly how the monsters are patched and that 30 co
 Files have been provided to also handle incompatibilities with certain mods.
 I use this tool for [my own mod on Steam Workshop.](https://steamcommunity.com/sharedfiles/filedetails/?id=3490023576)
 The shadersoverride folder contains copies of what I use in my mod, but on generation it'll overwrite my paths with your mod path.
+The palette_extender_30 tool goes into "YourDecompiledCassetteBeastsFolder"/tools Then you just play the scene NOT the project.
