@@ -91,19 +91,11 @@ func _ready():
 	glitter_region_options.add_item("Second Region")
 	glitter_region_options.add_item("Third Region")
 	glitter_region_options.add_item("Fourth Region")
-#	glitter_region_options.add_item("Fifth Region", 4)
-#	glitter_region_options.add_item("First+Second Region", 4)
-#	glitter_region_options.add_item("First+Third Region", 5)
-#	glitter_region_options.add_item("Second+Third Region", 6)
 	
 	astral_region_options.add_item("First Region")
 	astral_region_options.add_item("Second Region")
 	astral_region_options.add_item("Third Region")
 	astral_region_options.add_item("Fourth Region")
-#	astral_region_options.add_item("Fifth Region", 4)
-#	astral_region_options.add_item("First+Second Region", 4)
-#	astral_region_options.add_item("First+Third Region", 5)
-#	astral_region_options.add_item("Second+Third Region", 6)
 
 	mod_name = get_project_info(get_current_monster_name())
 	update_slots()
@@ -119,10 +111,9 @@ func _on_popup_about_to_show():
 
 
 
-var start_index = 34
+var start_index = 0
 
 func _sort_by_bestiary_index(a, b):
-#	return a.bestiary_index < b.bestiary_index
 	var a_index = a.bestiary_index
 	var b_index = b.bestiary_index
 
@@ -205,15 +196,6 @@ func update_selection():
 				glitter_region_options.select(2)
 			if form.glitter_region.size() > 0 and form.glitter_region[0] == 15:
 				glitter_region_options.select(3)
-#			if form.glitter_region.size() > 0 and form.glitter_region[0] == 20:
-#				glitter_region_options.select(4)
-#			if form.glitter_region.size() > 0 and form.glitter_region[0] == 1:
-#				glitter_region_options.select(4)
-#			if form.glitter_region.size() > 0 and form.glitter_region[0] == 2:
-#				glitter_region_options.select(5)
-#			if form.glitter_region.size() > 0 and form.glitter_region[0] == 6:
-#				glitter_region_options.select(6)
-#
 			if form.astral_region.size() > 0 and form.astral_region[0] == 0:
 				astral_region_options.select(0)
 			if form.astral_region.size() > 0 and form.astral_region[0] == 5:
@@ -222,14 +204,6 @@ func update_selection():
 				astral_region_options.select(2)
 			if form.astral_region.size() > 0 and form.astral_region[0] == 15:
 				astral_region_options.select(3)
-#			if form.astral_region.size() > 0 and form.astral_region[0] == 20:
-#				astral_region_options.select(4)
-#			if form.astral_region.size() > 0 and form.astral_region[0] == 20:
-#				astral_region_options.select(4)
-#			if form.astral_region.size() > 0 and form.astral_region[0] == 25:
-#				astral_region_options.select(5)
-#			if form.astral_region.size() > 0 and form.astral_region[0] == 30:
-#				astral_region_options.select(6)
 
 			set_ui_palette(form.extended_type_palettes[type.id])
 			set_type_refsheet(type)
@@ -264,9 +238,6 @@ func set_ui_palette(colors):
 		color11, color12, color13, color14, color15, color16, color17, color18, color19, color20,
 		color21, color22, color23, color24, color25, color26, color27, color28, color29, color30,
 	]
-	
-#	for i in range(min(colors.size(), color_nodes.size())):
-#		color_nodes[i].color = colors[i]
 
 	# Pad colors array to 30 if needed
 	if colors.size() < 30:
@@ -279,7 +250,6 @@ func set_ui_palette(colors):
 
 		if color_nodes[i] != null:
 			color_nodes[i].color = target_color
-
 	
 func _on_item_selected(_id):
 	update_selection()
@@ -298,9 +268,6 @@ func _on_BackgroundButton_item_selected(id):
 func duplicate_monster_data(form, original_data):	
 	form.name = original_data.name
 	form.swap_colors = original_data.swap_colors.duplicate()
-
-#	for color in original_data.emission_palette:
-#		form.swap_colors.append(color)
 
 	form.default_palette = original_data.swap_colors.duplicate()
 	form.emission_palette = original_data.emission_palette.duplicate()
@@ -349,14 +316,9 @@ func duplicate_monster_data(form, original_data):
 	form.bestiary_data_requirement_flag = original_data.bestiary_data_requirement_flag
 	form.loot_table = original_data.loot_table
 
-
-
-
 func pad_swap_colors_to_30(colors: Array) -> void:
 	while colors.size() < 30:
 		colors.append(Color.black)
-		
-		
 		
 func generate_extended_form()->String:
 	var form = monster_forms[monster_button.get_selected_id()]
@@ -404,40 +366,6 @@ func generate_metadata_file(modload_script, folder)->String:
 	if err != OK:
 		return "Failed to create metadata.tres file."
 	return "Generated " + folder+"/metadata.tres ."
-
-#func generate_metadata_file(modload_script, folder)->String:
-#	var metadata_path = folder + "/metadata.tres"
-#	var dir = Directory.new()
-#
-#	if dir.file_exists(metadata_path):
-#		return "metadata.tres already exists, no further action required."
-#
-#	var metadata = ContentInfo.new()
-#	metadata.set_script(modload_script)
-#
-#	# First save establishes the metadata resource.
-#	var err = ResourceSaver.save(metadata_path, metadata)
-#
-#	if err != OK:
-#		return "Failed to create metadata.tres file."
-#
-#	# Now modify the already-established resource.
-#	var modified_files:Array = metadata.get("modified_files")
-#
-#	modified_files.append("res://mods/cat_qol/bootleg_noise.gd")
-#	modified_files.append("res://mods/Tape Re-Release/EvolutionMenu.tscn")
-#
-#	metadata.set("modified_files", modified_files)
-#
-#	print("BEFORE SECOND SAVE: ", metadata.get("modified_files"))
-#
-#	err = ResourceSaver.save(metadata_path, metadata)
-#
-#	if err != OK:
-#		return "Failed to update metadata.tres file."
-#
-#	return "Generated " + metadata_path + " ."
-
 
 func generate_monster_form_file()->String:
 	var form = monster_forms[monster_button.get_selected_id()]
@@ -695,8 +623,7 @@ func _init():
 	var battleslot:Resource = preload("%s/shadersoverride/BattleSlot_ext.tscn")
 	var monsterspritecontainer:Resource = preload("%s/shadersoverride/MonsterSpriteContainer_ext.tscn")
 	var evolutionmenu:Resource = preload("%s/shadersoverride/EvolutionMenu_ext.tscn")
-	var itemdrop:Resource = preload("%s/shadersoverride/ItemDrop_ext.tscn")
-	
+	var iteminfo:Resource = preload("res://mods/zSkele_Bootlegs/shadersoverride/ItemInfoPanel_ext.tscn")
 
 	if file.file_exists("res://mods/zBattleCry_Tapes/shadersoverride/BattleSlot_ext.tscn"):
 		var battleslotBC:Resource = preload("%s/shadersoverride/BattleSlot_Cry_ext.tscn")
@@ -718,7 +645,7 @@ func _init():
 		print("Tape Re-Release not found, skipping MonsterSpriteContainer override.")
 	
 	monsterspritecontainer.take_over_path("res://menus/party/MonsterSpriteContainer.tscn")
-	itemdrop.take_over_path("res://world/core/ItemDrop.tscn")
+	iteminfo.take_over_path("res://menus/inventory/ItemInfoPanel.tscn")
 
 	# Overworld
 	if file.file_exists("res://mods/static_backups/MonsterPalette.gd"):
