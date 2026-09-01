@@ -858,23 +858,6 @@ func has_project_info(monster_name:String)->bool:
 func replace_default_form(new_form):	
 	monster_forms[monster_button.get_selected_id()] = new_form
 
-#func _on_Color_changed(color, index):
-#	var form = monster_forms[monster_button.get_selected_id()]
-#	if coating_button.get_selected_id() != 99 and not coating_button.get_selected_id() == ElementalTypes.table.values().size():
-#		var type = ElementalTypes.table.values()[coating_button.get_selected_id()]
-#		form.extended_type_palettes[type.id][index] = color
-#		update_selection()
-#	elif coating_button.get_selected_id() == ElementalTypes.table.values().size():	
-#		form.default_palette[index] = color
-#		slot.set_form(null)
-#		update_selection()
-#
-#	else:
-#		form.swap_colors[index] = color
-#		update_selection()
-
-
-
 func _on_Color_changed(color, index):
 	var form = monster_forms[monster_button.get_selected_id()]
 	
@@ -896,9 +879,6 @@ func _on_Color_changed(color, index):
 		else:
 			form.swap_colors[index] = color  # Regular palette swap
 		update_selection()
-
-
-
 
 func validate_mod_folder():
 	var dir = Directory.new()
@@ -1043,15 +1023,7 @@ func _on_GlitterRegionOption_item_selected(index):
 			if form.glitter_region[0] == 10:
 				glitter_region_memory[form] = 2
 			if form.glitter_region[0] == 15:
-				glitter_region_memory[form] = 3
-#			if form.glitter_region[0] == 20:
-#				glitter_region_memory[form] = 4
-#			if form.glitter_region[0] == 1:
-#				glitter_region_memory[form] = 4
-#			if form.glitter_region[0] == 2:
-#				glitter_region_memory[form] = 5
-#			if form.glitter_region[0] == 6:
-#				glitter_region_memory[form] = 6						
+				glitter_region_memory[form] = 3				
 		if glitter_region_memory.has(form):
 			swap_glitter_palette(glitter_region_memory[form])
 		swap_glitter_palette(index)	
@@ -1069,15 +1041,7 @@ func _on_AstralRegionOption_item_selected(index):
 			if form.astral_region[0] == 10:
 				astral_region_memory[form] = 2
 			if form.astral_region[0] == 15:
-				astral_region_memory[form] = 3
-#			if form.astral_region[0] == 20:
-#				astral_region_memory[form] = 4
-#			if form.astral_region[0] == 20:
-#				astral_region_memory[form] = 4
-#			if form.astral_region[0] == 25:
-#				astral_region_memory[form] = 5
-#			if form.astral_region[0] == 30:
-#				astral_region_memory[form] = 6						
+				astral_region_memory[form] = 3				
 		if astral_region_memory.has(form):
 			swap_astral_palette(astral_region_memory[form])
 		swap_astral_palette(index)	
@@ -1098,21 +1062,6 @@ func swap_glitter_palette(swap_region):
 		form.glitter_region = [10,11,12,13,14]
 	if swap_region == 3:
 		form.glitter_region = [15,16,17,18,19]
-#		form.glitter_region = [15,16,17,18,19,20,21,22,23,24,25,26,27,28,29]
-#	if swap_region == 4:
-#		form.glitter_region = [20,21,22,23,24,5,6,7,8,9]
-#	if swap_region == 4:
-#		form.glitter_region = [1, 0, 2, 3, 4]
-#		form.glitter_region += [5, 6, 7, 8, 9]
-##		form.glitter_region = [1,0,2,3,4,5,6,7,8,9]
-#	if swap_region == 5:
-#		form.glitter_region = [2, 0, 1, 3, 4]
-#		form.glitter_region += [10, 11, 12, 13, 14]
-##		form.glitter_region = [2,0,1,3,4,10,11,12,13,14]
-#	if swap_region == 6:
-#		form.glitter_region = [6, 5, 7, 8, 9]
-#		form.glitter_region += [10, 11, 12, 13, 14]
-##		form.glitter_region = [6,5,7,8,9,10,11,12,13,14]
 
 	for glitter_index in form.glitter_region:
 		form.extended_type_palettes[type.id][index] = type_palette[glitter_index]
@@ -1132,16 +1081,6 @@ func swap_astral_palette(swap_region):
 		form.astral_region = [10,11,12,13,14]
 	if swap_region == 3:
 		form.astral_region = [15,16,17,18,19]
-#		form.astral_region = [15,16,17,18,19,20,21,22,23,24,25,26,27,28,29]
-#	if swap_region == 4:
-#		form.astral_region = [20,21,22,23,24,5,6,7,8,9]
-#	if swap_region == 4:
-#		form.astral_region = [0,1,2,3,4,5,6,7,8,9]
-#	if swap_region == 5:
-#		form.astral_region = [0,1,2,3,4,10,11,12,13,14]
-#	if swap_region == 6:
-#		form.astral_region = [5,6,7,8,9,10,11,12,13,14]
-
 			
 	for astral_index in form.astral_region:
 		form.extended_type_palettes[type.id][index] = type_palette[astral_index]
